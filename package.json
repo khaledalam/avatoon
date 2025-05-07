@@ -1,0 +1,72 @@
+{
+  "name": "Avatoon",
+  "version": "1.0.0",
+  "description": "A React Three Fiber component for realistic avatar lip-syncing and animations.",
+  "main": "lib/Avatoon.umd.js",
+  "module": "lib/Avatoon.es.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "require": "./lib/Avatoon.umd.js",
+      "import": "./lib/Avatoon.es.js"
+    }
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json && vite build",
+    "dev": "tsc --project tsconfig.build.json && vite build --watch",
+    "clean": "rm -rf ./lib/",
+    "lint": "eslint ./src/ --fix",
+    "typecheck": "tsc --noEmit",
+    "test": "jest --coverage",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "avatoon",
+    "avatar",
+    "react-three-fiber",
+    "lip-sync",
+    "3d",
+    "avatar-animation",
+    "threejs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khaledalam/avatoon.git"
+  },
+  "author": {
+    "name": "Khaled Alam",
+    "email": "khaledalam.net@gmail.com",
+    "url": "https://github.com/khaledalam"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@react-three/drei": "^9.0.0",
+    "@react-three/fiber": "^8.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.0.0",
+    "three": "^0.153.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^8.32.0",
+    "@typescript-eslint/parser": "^8.32.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.30.0",
+    "eslint-config-prettier": "^10.1.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.4.0",
+    "husky": "^8.0.0",
+    "jest": "^29.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "typescript": "^5.0.4",
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^3.6.1"
+  }
+}
