@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/khaledalam/avatoon/compare/v1.3.0...v1.4.0) (2025-05-08)
+
+### Features
+
+* exclude example from jest. ([8c3971c](https://github.com/khaledalam/avatoon/commit/8c3971c500162fcac214038188ec78f59623ce59))
+
 ## [1.3.0](https://github.com/khaledalam/avatoon/compare/v1.2.0...v1.3.0) (2025-05-08)
 
 ### Features
