@@ -23,16 +23,15 @@ jobs:
       - name: ⬇️ Checkout codeS fallback for Rollup (tempora
         uses: actions/checkout@v3
 
-      - name: 🔐 Configure npm authentication
-        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: 🟦 Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          registry-url: 'https://registry.npmjs.org/'
+
+      - name: 🔐 Configure npm authentication
+        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > $HOME/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Clean npm cache
         run: |
