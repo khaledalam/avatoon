@@ -17,7 +17,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: ⬇️ Checkout code
+      - name: ⬇️ Checkout codeS fallback for Rollup (tempora
         uses: actions/checkout@v3
 
       - name: 🟦 Setup Node.js
@@ -36,6 +36,8 @@ jobs:
 
       - name: 🔨 Build project
         run: npm run build
+        env:
+          ROLLUP_DISABLE_NATIVE: true
 
       - name: 🚀 Publish to npm
         run: npm publish --access public

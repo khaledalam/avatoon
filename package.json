@@ -75,7 +75,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "ts-jest": "^29.3.2",
     "typescript": "^5.0.4",
-    "vite": "^6.0.0",
+    "vite": "^5.2.8",
     "vite-plugin-dts": "^3.6.1"
   }
 }
