@@ -86,7 +86,7 @@ interface VisemeData {
 [build-url]:https://github.com/khaledalam/avatoon/actions/workflows/release.yml
 [npm-img]:https://img.shields.io/npm/v/avatoon
 [npm-url]:https://www.npmjs.com/package/avatoon
-[issues-img]:https://img.shields.io/github/issues/ryansonshine/avatoon
-[issues-url]:https://github.com/ryansonshine/avatoon/issues
-[codecov-img]:https://codecov.io/gh/ryansonshine/avatoon/branch/main/graph/badge.svg
-[codecov-url]:https://codecov.io/gh/ryansonshine/avatoon
+[issues-img]:https://img.shields.io/github/issues/khaledalam/avatoon
+[issues-url]:https://github.com/khaledalam/avatoon/issues
+[codecov-img]:https://codecov.io/gh/khaledalam/avatoon/branch/main/graph/badge.svg
+[codecov-url]:https://codecov.io/gh/khaledalam/avatoon
