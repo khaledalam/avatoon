@@ -44,7 +44,7 @@ export default function Avatoon({
             shouldPlay={readyToPlay}
             visemeJson={visemeJson}
           />
-          {/* <Environment files={"@assets/venice_sunset_1k.hdr"} background /> */}
+          <Environment files={"@assets/venice_sunset_1k.hdr"} background />
           <Environment preset="sunset" />
         </Suspense>
         <CameraFovAnimator readyToPlay={readyToPlay} />
