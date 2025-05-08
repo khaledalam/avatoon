@@ -7,7 +7,7 @@ module.exports = {
       useESM: true,
     }],
   },
-  testPathIgnorePatterns: ['/node_modules/', '/.history/'],
+  testPathIgnorePatterns: ['/node_modules/', '/.history/', '/example'],
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
