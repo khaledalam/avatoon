@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/khaledalam/avatoon/compare/v1.1.0...v1.2.0) (2025-05-08)
+
+### Features
+
+* disable arm and hands animation while talking, fix example. ([a14ec05](https://github.com/khaledalam/avatoon/commit/a14ec053c8ced6ac7f1718570fddd0e9462039ed))
+* disable arm and hands animation while talking, fix example. ([1618aaf](https://github.com/khaledalam/avatoon/commit/1618aaf355a4d16012ad8c4b95ac1acdfb405fa2))
+
 ## [1.1.0](https://github.com/khaledalam/avatoon/compare/v1.0.0...v1.1.0) (2025-05-08)
 
 ### Features
