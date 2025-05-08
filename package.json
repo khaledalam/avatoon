@@ -1,6 +1,6 @@
 {
   "name": "avatoon",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "A React Three Fiber component for realistic avatar lip-syncing and animations.",
   "main": "lib/Avatoon.umd.js",
   "module": "lib/Avatoon.es.js",
