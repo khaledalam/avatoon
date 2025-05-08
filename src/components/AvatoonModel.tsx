@@ -228,10 +228,10 @@ export function AvatoonModel({
       }
 
       // smoother oscillation using easing
-      const waveLeft = 0.1 * Math.sin(t * 2.1) + 0.05 * Math.sin(t * 3.3);
-      const waveRight =
-        0.1 * Math.sin(t * 1.7 + 0.5) + 0.05 * Math.sin(t * 2.7 + 0.8);
-      const elbowBend = 0.1 * Math.sin(t * 1.3);
+      // const waveLeft = 0.1 * Math.sin(t * 2.1) + 0.05 * Math.sin(t * 3.3);
+      // const waveRight =
+      //   0.1 * Math.sin(t * 1.7 + 0.5) + 0.05 * Math.sin(t * 2.7 + 0.8);
+      // const elbowBend = 0.1 * Math.sin(t * 1.3);
 
       // arms up slightly with subtle speaking motion
       // if (leftArm.current)
