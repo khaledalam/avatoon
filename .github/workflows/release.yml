@@ -17,11 +17,6 @@ jobs:
       issues: write
 
     steps:
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-
       - name: ⬇️ Checkout codeS fallback for Rollup (tempora
         uses: actions/checkout@v3
 
