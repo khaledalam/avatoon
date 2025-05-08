@@ -24,7 +24,7 @@
     "typecheck": "tsc --noEmit",
     "test": "jest --coverage",
     "prepare": "husky install",
-    "example": "cd example && npm install && npm start"
+    "example": "cd example && npm uninstall avatoon && npm install avatoon && npm start"
   },
   "sideEffects": false,
   "keywords": [
