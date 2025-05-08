@@ -21,6 +21,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: ⬇️ Checkout codeS fallback for Rollup (tempora
+        uses: actions/checkout@v3
+
       - name: 🟦 Setup Node.js
         uses: actions/setup-node@v3
         with:
