@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/khaledalam/avatoon/compare/v1.2.0...v1.3.0) (2025-05-08)
+
+### Features
+
+* codecov. ([e0b2143](https://github.com/khaledalam/avatoon/commit/e0b2143772ae9f219736c65efb49b398f13e23d5))
+
 ## [1.2.0](https://github.com/khaledalam/avatoon/compare/v1.1.0...v1.2.0) (2025-05-08)
 
 ### Features
