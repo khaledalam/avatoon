@@ -11,7 +11,7 @@
 
 <img src="https://raw.githubusercontent.com/khaledalam/avatoon/main//test/assets/avatoon.gif" width="600"/>
 
-[demo video](hhttps://youtu.be/9ODqu2EZvtw)
+[demo video](https://youtu.be/9ODqu2EZvtw)
 
 
 ## ✨ Features
