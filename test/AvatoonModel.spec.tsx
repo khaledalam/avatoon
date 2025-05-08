@@ -4,13 +4,13 @@ import { AvatoonModel } from '../src/components/AvatoonModel';
 import '@testing-library/jest-dom';
 
 // Stub Audio API globally
-global.Audio = class {
-  play = jest.fn(() => Promise.resolve());
-  pause = jest.fn();
-  currentTime = 0;
-} as any;
+global.Audio = jest.fn().mockImplementation(() => ({
+  play: jest.fn(),
+  pause: jest.fn(),
+}));
 
 // Stub audio for environments like jsdom
+// @ts-ignore
 window.Audio = class {
   play = jest.fn(() => Promise.resolve());
   pause = jest.fn();

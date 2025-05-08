@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, rerender } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { CameraFovAnimator } from '../src/components/CameraFovAnimator';
 import * as THREE from 'three';
 
@@ -24,7 +24,6 @@ jest.mock('@react-three/fiber', () => ({
 
 describe('CameraFovAnimator', () => {
   beforeEach(() => {
-    mockCamera.updateProjectionMatrix.mockClear();
     useFrameCallback = null;
   });
 
