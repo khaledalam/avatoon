@@ -1,1 +1,1 @@
-export { default as Avatoon } from './Avatoon';
+export { default as Avatoon } from './components/Avatoon';

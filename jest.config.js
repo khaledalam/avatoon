@@ -1,15 +1,16 @@
+// jest.config.js
 module.exports = {
   preset: 'ts-jest',
-  testEnvironment: 'node',
-  testMatch: ['**/test/**/*.spec.ts'],
-  collectCoverageFrom: [
-    '<rootDir>/src/**/*.ts',
-    '!<rootDir>/src/types/**/*.ts',
-  ],
-  globals: {
-    'ts-jest': {
-      diagnostics: false,
-      isolatedModules: true,
-    },
+  testEnvironment: 'jsdom',
+  transform: {
+    '^.+\\.(ts|tsx)$': ['ts-jest', {
+      useESM: true,
+    }],
   },
+  testPathIgnorePatterns: ['/node_modules/', '/.history/'],
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  moduleNameMapper: {
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+  },
+  setupFilesAfterEnv: ['./jest.setup.ts'],
 };

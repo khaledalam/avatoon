@@ -1,4 +1,5 @@
-# avatoon
+# 🧠 Avatoon
+
 
 [![npm package][npm-img]][npm-url]
 [![Build Status][build-img]][build-url]
@@ -8,44 +9,86 @@
 [![Commitizen Friendly][commitizen-img]][commitizen-url]
 [![Semantic Release][semantic-release-img]][semantic-release-url]
 
-> My awesome module
 
-## Install
+**Avatoon** is a lightweight React Three Fiber component for rendering animated 3D avatars with real-time viseme-driven lip-sync. It supports lifelike head movements, morph target control, and optional goal-based gestures (e.g., flexing, sleeping), making it ideal for voice assistants, interactive characters, or storytelling apps.
+
+## ✨ Features
+- 🎤 Real-time lip-sync using phoneme-viseme mapping  
+- 🧍 Subtle head motion animation while talking  
+- 🌐 GLTF model support via `useGLTF`  
+- ⚛️ Plug-and-play with React Three Fiber + Drei  
+- 🎯 Goal-based gestures like "Muscle" or "Sleep"
+
+## 📦 Installation
 
 ```bash
 npm install avatoon
 ```
 
-## Usage
+## 🚀 Usage
 
-```ts
-import { myPackage } from 'avatoon';
+```js
+import { Avatoon } from "avatoon";
+
+export default App = () => {
+    const visemeJson = {
+        visemes: [{ 
+            { "time": 0, "viseme": "X" },
+            { "time": 1.3, "viseme": "A" },
+            { "time": 1.367, "viseme": "C" },
+         }],
+        audio_base64: '',
+    };
+
+    return (
+        <Avatoon
+            glbUrl='https://raw.githubusercontent.com/khaledalam/avatoon/main/test/assets/placeholder-avatar.glb'
+            goal={"Normal"}
+            onRenderComplete={() => console.log("Render Completed!")}
+            visemeJson={visemeJson}
+        />
+    );
+}
 
 ```
 
-## API
+## 🧩 API
 
-### myPackage(input, options?)
+### `Avatoon(props)`
 
-#### input
+| Prop                  | Type         | Default      | Description                                            |
+| --------------------- | ------------ | ------------ | ------------------------------------------------------ |
+| `glbUrl`              | `string`     | *(required)* | URL to the `.glb` avatar file (T1 or T2)               |
+| `goal`                | `string`     | `"Normal"`   | Goal-based motion preset: `"Muscle"`, `"Sleep"`, etc.  |
+| `onRenderComplete`    | `() => void` | `undefined`  | Callback fired when avatar finishes rendering          |
+| `visemeJson`          | `VisemeData` | `undefined`  | JSON structure for syncing visemes with audio playback |
+| `showPlayVoiceButton` | `boolean`    | `false`      | If true, renders a play/stop voice button in the scene |
 
-Type: `string`
+## 👤 Avatar Types
+- T1 (Static Face - Realistic)
+    - Most photorealistic
+    - No facial morphing
+    - Lightweight
+    - <img src="https://raw.githubusercontent.com/khaledalam/avatoon/main//test/assets/V1_bg.jpg" width="100"/>
+- T2 (Blendshape Face - Expressive)
+  - Separate eyeballs and mouth
+  - Supports morph targets / ARKit visemes
+  - Slightly less realistic but animatable
+    - <img src="https://raw.githubusercontent.com/khaledalam/avatoon/main//test/assets/V2_bg.jpg" width="100"/>
 
-Lorem ipsum.
+## 📘 Types
 
-#### options
+```ts
+interface VisemeData {
+  visemes: Array<{ time: number; viseme: string | null }>;
+  audio_base64?: string;
+}
+```
 
-Type: `object`
+## 📌 Badges & Metadata
 
-##### postfix
-
-Type: `string`
-Default: `rainbows`
-
-Lorem ipsum.
-
-[build-img]:https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml/badge.svg
-[build-url]:https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml
+[build-img]:https://github.com/khaledalam/avatoon/actions/workflows/release.yml/badge.svg
+[build-url]:https://github.com/khaledalam/avatoon/actions/workflows/release.yml
 [downloads-img]:https://img.shields.io/npm/dt/typescript-npm-package-template
 [downloads-url]:https://www.npmtrends.com/typescript-npm-package-template
 [npm-img]:https://img.shields.io/npm/v/typescript-npm-package-template
