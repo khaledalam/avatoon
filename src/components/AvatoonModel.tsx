@@ -24,9 +24,7 @@ export function AvatoonModel({
   >([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // const [currentVisemeText, setCurrentVisemeText] = useState<string | null>(
-  //   null
-  // );
+  // const [currentVisemeText, setCurrentVisemeText] = useState<string | null>(null);
 
   const group = useRef<Group | null>(null);
   const { scene } = useGLTF(url) as unknown as GLTF;
