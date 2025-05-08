@@ -1,9 +1,2 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
-
-if [ -x ./node_modules/.bin/cz ]; then
-  exec </dev/tty && ./node_modules/.bin/cz || true
-else
-  echo "❌ Commitizen (cz) not found. Please run: npm install"
-  exit 1
-fi
