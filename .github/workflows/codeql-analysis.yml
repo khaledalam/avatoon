@@ -18,3 +18,26 @@ on:
 jobs:
   analyze:
     uses: ryansonshine/ryansonshine/.github/workflows/codeql-analysis.yml@main
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🟦 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Clean npm cache
+        run: |
+          rm -rf node_modules
+          npm cache clean --force
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: Run jest
+        run: npx jest --coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
