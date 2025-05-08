@@ -234,26 +234,26 @@ export function AvatoonModel({
       const elbowBend = 0.1 * Math.sin(t * 1.3);
 
       // arms up slightly with subtle speaking motion
-      if (leftArm.current)
-        leftArm.current.rotation.set(0.3 + waveLeft, 0.2, Math.PI / 2);
+      // if (leftArm.current)
+      //   leftArm.current.rotation.set(0.3 + waveLeft, 0.2, Math.PI / 2);
 
-      if (rightArm.current)
-        rightArm.current.rotation.set(0.3 + waveRight, 0, -Math.PI / 2 - 0.1);
+      // if (rightArm.current)
+      //   rightArm.current.rotation.set(0.3 + waveRight, 0, -Math.PI / 2 - 0.1);
 
       // Forearm (elbow)
-      if (leftForearm.current)
-        leftForearm.current.rotation.set(0.2, 0.7, 1.2 + 0.8 * Math.sin(t * 4));
+      // if (leftForearm.current)
+      //   leftForearm.current.rotation.set(0.2, 0.7, 1.2 + 0.8 * Math.sin(t * 4));
 
-      if (rightForearm.current)
-        rightForearm.current.rotation.set(0.6 + elbowBend, 0, -Math.PI / 2);
+      // if (rightForearm.current)
+      //   rightForearm.current.rotation.set(0.6 + elbowBend, 0, -Math.PI / 2);
 
-      if (leftHand.current) {
-        leftHand.current.rotation.set(
-          0.05 + 0.07 * Math.sin(t * 2.3),
-          -0.7,
-          Math.PI / 2 + 0.2 * Math.sin(t * 1.5)
-        );
-      }
+      // if (leftHand.current) {
+      //   leftHand.current.rotation.set(
+      //     0.05 + 0.07 * Math.sin(t * 2.3),
+      //     -0.7,
+      //     Math.PI / 2 + 0.2 * Math.sin(t * 1.5)
+      //   );
+      // }
 
       // if (rightHand.current) {
       // 	rightHand.current.rotation.set(
