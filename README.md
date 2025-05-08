@@ -10,7 +10,7 @@
 **Avatoon** is a lightweight React Three Fiber component for rendering animated 3D avatars with real-time viseme-driven lip-sync. It supports lifelike head movements, morph target control, and optional goal-based gestures (e.g., flexing, sleeping), making it ideal for voice assistants, interactive characters, or storytelling apps.
 
 <img src="https://raw.githubusercontent.com/khaledalam/avatoon/main//test/assets/avatoon.gif" width="300"/>
-[demo video](https://raw.githubusercontent.com/khaledalam/avatoon/main//test/assets/avatoon.mp4)
+[demo video](hhttps://youtu.be/9ODqu2EZvtw)
 
 
 ## ✨ Features
@@ -90,6 +90,18 @@ interface VisemeData {
   audio_base64?: string;
 }
 ```
+
+
+## 🤝 Contribution
+Pull requests are welcome! If you'd like to suggest improvements or fix issues, feel free to fork and submit.
+
+
+## 🛡️ Author
+
+**Khaled Alam**
+
+📧 [khaledalam.net@gmail.com](mailto:khaledalam.net@gmail.com)<br />
+🌍 [Website](https://khaledalam.net/) | [LinkedIn](https://www.linkedin.com/in/khaledalam/) | [X(Twitter)](https://x.com/khaledalamxyz)
 
 [build-img]:https://github.com/khaledalam/avatoon/actions/workflows/release.yml/badge.svg
 [build-url]:https://github.com/khaledalam/avatoon/actions/workflows/release.yml
