@@ -46,6 +46,7 @@ jobs:
         env:
           ROLLUP_DISABLE_NATIVE: true
 
+      #manual
       # - name: 🚀 Publish to npm
       #   run: npm publish --access public
       #   env:
