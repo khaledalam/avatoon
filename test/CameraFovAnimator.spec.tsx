@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import { CameraFovAnimator } from '../src/components/CameraFovAnimator';
 import * as THREE from 'three';
