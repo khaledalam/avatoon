@@ -9,6 +9,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      ROLLUP_DISABLE_NATIVE: true
 
     permissions:
       contents: write
