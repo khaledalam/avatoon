@@ -49,6 +49,11 @@ export default App = () => {
 
 ```
 
+### To run example:
+```bash
+npm run example
+```
+
 ## 🧩 API
 
 ### `Avatoon(props)`
