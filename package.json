@@ -40,6 +40,7 @@
     "type": "git",
     "url": "https://github.com/khaledalam/avatoon.git"
   },
+  "repositoryUrl": "https://github.com/khaledalam/avatoon.git",
   "author": {
     "name": "Khaled Alam",
     "email": "khaledalam.net@gmail.com",
