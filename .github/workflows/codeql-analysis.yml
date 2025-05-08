@@ -1,6 +1,6 @@
 # Reusable workflow for code analysis; to eject, you can replace this file with
 # https://github.com/ryansonshine/ryansonshine/blob/main/.github/workflows/codeql-analysis.yml
-name: "CodeQL"
+name: 🔍 CodeQL
 
 permissions:
   security-events: write
@@ -14,7 +14,7 @@ on:
     # The branches below must be a subset of the branches above
     branches: [main]
   schedule:
-    - cron: "36 7 * * 6"
+    - cron: '36 7 * * 6'
 
 jobs:
   analyze:
