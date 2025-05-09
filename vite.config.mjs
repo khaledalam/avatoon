@@ -1,15 +1,20 @@
+import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
 export default defineConfig({
+  optimizeDeps: {
+    exclude: ['react', 'react-dom'],
+  },
   plugins: [
     peerDepsExternal(),
     react(),
     dts({
       insertTypesEntry: true,
     }),
+    visualizer({ filename: 'bundle-report.html', open: true }),
   ],
   build: {
     outDir: 'lib',
