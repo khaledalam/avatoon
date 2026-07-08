@@ -3,9 +3,9 @@ import { Avatoon, LipSyncAvatoon } from 'avatoon';
 import './App.css';
 import visemeJson from './visemeData.json';
 
-// Resolve public assets against PUBLIC_URL so they work on GitHub Pages
+// Resolve public assets against the Vite base URL so they work on GitHub Pages
 // (served from the /avatoon/ subpath) as well as locally.
-const avatarUrl = `${process.env.PUBLIC_URL}/avatar.glb`;
+const avatarUrl = `${import.meta.env.BASE_URL}avatar.glb`;
 
 function App() {
   return (
