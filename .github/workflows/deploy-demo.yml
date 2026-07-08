@@ -32,14 +32,18 @@ jobs:
         with:
           node-version: 20
 
-      # Build the library from source first — the demo consumes it via the
-      # local `file:..` dependency, so it must exist in ./lib before we install
-      # the example (this also picks up components not yet published to npm).
+      # Build the library from source and pack it into a tarball. The demo
+      # installs that tarball (not a symlink) so React resolves to a single
+      # copy — a symlinked local dep pulls in the library's own React and
+      # crashes with "invalid hook call". This also picks up components not
+      # yet published to npm.
       - name: 📦 Install library dependencies
         run: npm install
 
-      - name: 🔨 Build library
-        run: npm run build
+      - name: 🔨 Build & pack library
+        run: |
+          npm run build
+          npm pack
 
       - name: 📦 Install demo dependencies
         working-directory: example
