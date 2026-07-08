@@ -124,7 +124,10 @@ interface VisemeData {
 
 
 ## 🤝 Contribution
-Pull requests are welcome! If you'd like to suggest improvements or fix issues, feel free to fork and submit.
+Pull requests are welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md) for local
+setup and development workflow, and please review our
+[Code of Conduct](./CODE_OF_CONDUCT.md). To report a security issue, see
+[SECURITY.md](./SECURITY.md).
 
 
 ## 🛡️ Author
