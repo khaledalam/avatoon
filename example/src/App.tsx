@@ -3,13 +3,17 @@ import { Avatoon, LipSyncAvatoon } from 'avatoon';
 import './App.css';
 import visemeJson from './visemeData.json';
 
+// Resolve public assets against PUBLIC_URL so they work on GitHub Pages
+// (served from the /avatoon/ subpath) as well as locally.
+const avatarUrl = `${process.env.PUBLIC_URL}/avatar.glb`;
+
 function App() {
   return (
     <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '20px', paddingBottom: '50px' }}>
       <h1>Original Avatoon</h1>
       <div style={{ height: '400px' }}>
         <Avatoon
-          glbUrl={'/avatar.glb'}
+          glbUrl={avatarUrl}
           goal={'Normal'}
           onRenderComplete={() => console.log('Render Completed!')}
           visemeJson={visemeJson}
@@ -21,7 +25,7 @@ function App() {
 
       <h1>Lip Sync Only (No Audio)</h1>
       <div style={{ height: '400px' }}>
-        <LipSyncAvatoon glbUrl={'/avatar.glb'} />
+        <LipSyncAvatoon glbUrl={avatarUrl} />
       </div>
     </div>
   );

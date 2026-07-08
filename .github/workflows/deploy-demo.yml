@@ -1,0 +1,68 @@
+name: 🌐 Deploy Demo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'example/**'
+      - 'package.json'
+      - '.github/workflows/deploy-demo.yml'
+  workflow_dispatch:
+
+# Allow one concurrent deployment, and let in-progress runs finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🟦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Build the library from source first — the demo consumes it via the
+      # local `file:..` dependency, so it must exist in ./lib before we install
+      # the example (this also picks up components not yet published to npm).
+      - name: 📦 Install library dependencies
+        run: npm install
+
+      - name: 🔨 Build library
+        run: npm run build
+
+      - name: 📦 Install demo dependencies
+        working-directory: example
+        run: npm install
+
+      - name: 🔨 Build demo
+        working-directory: example
+        run: npm run build
+        env:
+          CI: false # treat CRA warnings as warnings, not errors
+
+      - name: 📤 Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: example/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
