@@ -24,8 +24,6 @@ export function AvatoonModel({
   >([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // const [currentVisemeText, setCurrentVisemeText] = useState<string | null>(null);
-
   const group = useRef<Group | null>(null);
   const { scene } = useGLTF(url) as unknown as GLTF;
 
@@ -72,7 +70,7 @@ export function AvatoonModel({
     };
 
     loadData();
-  }, []);
+  }, [visemeJson]);
 
   useEffect(() => {
     if (shouldPlay && audioRef.current) {
@@ -174,10 +172,7 @@ export function AvatoonModel({
     const current = [...visemeData].reverse().find(v => v.time <= currentTime);
 
     if (!current || current.viseme === lastVisemeRef.current) return;
-
-    // console.log(current.viseme);
-    // setCurrentVisemeText(current.viseme);
-    // setTimeout(() => setCurrentVisemeText(null), 300);
+    lastVisemeRef.current = current.viseme;
 
     for (const { mesh, visemes } of mouthMeshes.current) {
       if (!mesh.morphTargetInfluences) continue;
@@ -206,67 +201,15 @@ export function AvatoonModel({
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
 
-    // Animate during speech
-    if (isTalking) {
-      const t = clock.getElapsedTime();
+    // Subtle head motion while speaking
+    if (isTalking && head.current) {
+      const basePitch = -0.2; // lift head slightly upward (negative X is up in Three.js)
 
-      // Animate head nodding subtly
-      if (head.current) {
-        const basePitch = -0.2; // lift head slightly upward (negative X is up in Three.js)
-        const baseYaw = 0; // center
-        const baseRoll = 0; // neutral tilt
+      const nod = 0.03 * Math.sin(t * 2); // small vertical nod
+      const tilt = 0.015 * Math.sin(t * 2.2); // subtle head tilt (Z)
+      const turn = 0.025 * Math.sin(t * 1.5); // subtle head turn (Y)
 
-        const nod = 0.03 * Math.sin(t * 2); // small vertical nod
-        const tilt = 0.015 * Math.sin(t * 2.2); // subtle head tilt (Z)
-        const turn = 0.025 * Math.sin(t * 1.5); // subtle head turn (Y)
-
-        head.current.rotation.set(
-          basePitch + nod, // X (nodding with slight upward bias)
-          baseYaw + turn, // Y (left-right)
-          baseRoll + tilt // Z (tilt)
-        );
-      }
-
-      // smoother oscillation using easing
-      // const waveLeft = 0.1 * Math.sin(t * 2.1) + 0.05 * Math.sin(t * 3.3);
-      // const waveRight =
-      //   0.1 * Math.sin(t * 1.7 + 0.5) + 0.05 * Math.sin(t * 2.7 + 0.8);
-      // const elbowBend = 0.1 * Math.sin(t * 1.3);
-
-      // arms up slightly with subtle speaking motion
-      // if (leftArm.current)
-      //   leftArm.current.rotation.set(0.3 + waveLeft, 0.2, Math.PI / 2);
-
-      // if (rightArm.current)
-      //   rightArm.current.rotation.set(0.3 + waveRight, 0, -Math.PI / 2 - 0.1);
-
-      // Forearm (elbow)
-      // if (leftForearm.current)
-      //   leftForearm.current.rotation.set(0.2, 0.7, 1.2 + 0.8 * Math.sin(t * 4));
-
-      // if (rightForearm.current)
-      //   rightForearm.current.rotation.set(0.6 + elbowBend, 0, -Math.PI / 2);
-
-      // if (leftHand.current) {
-      //   leftHand.current.rotation.set(
-      //     0.05 + 0.07 * Math.sin(t * 2.3),
-      //     -0.7,
-      //     Math.PI / 2 + 0.2 * Math.sin(t * 1.5)
-      //   );
-      // }
-
-      // if (rightHand.current) {
-      // 	rightHand.current.rotation.set(
-      // 		0.05 + 0.05 * Math.sin(t * 2.6),
-      // 		0,
-      // 		-Math.PI / 2 + 0.2 * Math.cos(t * 1.9),
-      // 	);
-      // }
-
-      // if (group.current) {
-      //   group.current.position.y = -0.4 + 0.01 * Math.sin(t * 1.2);
-      //   group.current.rotation.y = 0.02 * Math.sin(t * 0.9);
-      // }
+      head.current.rotation.set(basePitch + nod, turn, tilt);
     }
 
     if (goal === 'Muscle') {
@@ -302,11 +245,6 @@ export function AvatoonModel({
   return (
     <group ref={group} position={[0, -0.4, 0]}>
       <primitive object={scene} />
-      {/* {isTalking && head.current && (
-          <Html position={[0, 1.7, 0.8]} center>
-            {currentVisemeText || 'Talking...'}
-          </Html>
-        )} */}
     </group>
   );
 }

@@ -4,7 +4,6 @@ import { Environment, OrbitControls } from '@react-three/drei';
 import { AvatoonModel } from './AvatoonModel';
 import { CameraFovAnimator } from './CameraFovAnimator';
 import type { AvatoonProps } from '../types';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './Avatoon.module.css';
 
 export default function Avatoon({
@@ -21,7 +20,7 @@ export default function Avatoon({
     <>
       {showPlayVoiceButton && isFullyRendered && (
         <button
-          className={'talk-button'}
+          className={styles['talk-button']}
           onClick={() => setReadyToPlay(!readyToPlay)}
         >
           {!readyToPlay ? '▶️ Talk with me now' : '⏹️ Stop talking'}
