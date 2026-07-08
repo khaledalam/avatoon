@@ -29,32 +29,53 @@ npm install avatoon
 
 ## 🚀 Usage
 
-```js
+### `Avatoon` — full avatar with audio-synced lip-sync
+
+```jsx
 import { Avatoon } from "avatoon";
 
-export default App = () => {
-    const visemeJson = {
-        visemes: [{ 
-            { "time": 0, "viseme": "X" },
-            { "time": 1.3, "viseme": "A" },
-            { "time": 1.367, "viseme": "C" },
-         }],
-        audio_base64: '',
-    };
+const visemeJson = {
+  visemes: [
+    { time: 0, viseme: "X" },
+    { time: 1.3, viseme: "A" },
+    { time: 1.367, viseme: "C" },
+  ],
+  audio_base64: "", // base64-encoded WAV (optional)
+};
 
-    return (
-        <Avatoon
-            glbUrl='https://raw.githubusercontent.com/khaledalam/avatoon/main/test/assets/placeholder-avatar.glb'
-            goal={"Normal"}
-            onRenderComplete={() => console.log("Render Completed!")}
-            visemeJson={visemeJson}
-        />
-    );
+export default function App() {
+  return (
+    <div style={{ width: "100%", height: 400 }}>
+      <Avatoon
+        glbUrl="https://raw.githubusercontent.com/khaledalam/avatoon/main/test/assets/placeholder-avatar.glb"
+        goal="Normal"
+        visemeJson={visemeJson}
+        showPlayVoiceButton
+        onRenderComplete={() => console.log("Render Completed!")}
+      />
+    </div>
+  );
 }
-
 ```
 
-### To run example:
+### `LipSyncAvatoon` — standalone lip-sync (no audio required)
+
+A self-contained component with a built-in Start/Stop button that animates
+procedural mouth movement. Great for quick demos or "talking head" idle states.
+
+```jsx
+import { LipSyncAvatoon } from "avatoon";
+
+export default function App() {
+  return (
+    <div style={{ width: "100%", height: 400 }}>
+      <LipSyncAvatoon glbUrl="/avatar.glb" />
+    </div>
+  );
+}
+```
+
+### To run the example app locally:
 ```bash
 npm run example
 ```
@@ -70,6 +91,15 @@ npm run example
 | `onRenderComplete`    | `() => void` | `undefined`  | Callback fired when avatar finishes rendering          |
 | `visemeJson`          | `VisemeData` | `undefined`  | JSON structure for syncing visemes with audio playback |
 | `showPlayVoiceButton` | `boolean`    | `false`      | If true, renders a play/stop voice button in the scene |
+
+### `LipSyncAvatoon(props)`
+
+A lightweight, self-contained variant that drives procedural mouth movement
+(no `visemeJson` or audio needed) and renders its own Start/Stop button.
+
+| Prop     | Type     | Default        | Description                          |
+| -------- | -------- | -------------- | ------------------------------------ |
+| `glbUrl` | `string` | `"/avatar.glb"` | URL to the `.glb` avatar file (T2)  |
 
 ## 👤 Avatar Types
 - T1 (Static Face - Realistic)
