@@ -9,7 +9,7 @@
 
 **Avatoon** is a lightweight React Three Fiber component for rendering animated 3D avatars with real-time viseme-driven lip-sync. It supports lifelike head movements, morph target control, and optional goal-based gestures (e.g., flexing, sleeping), making it ideal for voice assistants, interactive characters, or storytelling apps.
 
-### 🎮 [**Try the live demo →**](https://khaledalam.github.io/avatoon/)
+### 🎮 [**Try the live demo →**](https://khaledalam.net/avatoon/)
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/khaledalam/avatoon/tree/main/example)
 
