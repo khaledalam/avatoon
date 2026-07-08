@@ -1,10 +1,28 @@
-import { useState, Suspense } from 'react';
+import { useState, Suspense, type CSSProperties } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls } from '@react-three/drei';
 import { AvatoonModel } from './AvatoonModel';
 import { CameraFovAnimator } from './CameraFovAnimator';
 import type { AvatoonProps } from '../types';
-import styles from './Avatoon.module.css';
+
+// Inline styles keep the component zero-config for consumers — no separate
+// stylesheet import required (mirrors LipSyncAvatoon's approach).
+const talkButtonStyle: CSSProperties = {
+  position: 'absolute',
+  top: 5,
+  left: 5,
+  padding: '10px 20px',
+  background: 'white',
+  border: '1px solid #d0d0d0',
+  borderRadius: 8,
+  fontWeight: 600,
+  fontSize: 14,
+  color: '#222',
+  cursor: 'pointer',
+  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
+  transition: 'all 0.2s ease',
+  zIndex: 999,
+};
 
 export default function Avatoon({
   glbUrl,
@@ -20,7 +38,7 @@ export default function Avatoon({
     <>
       {showPlayVoiceButton && isFullyRendered && (
         <button
-          className={styles['talk-button']}
+          style={talkButtonStyle}
           onClick={() => setReadyToPlay(!readyToPlay)}
         >
           {!readyToPlay ? '▶️ Talk with me now' : '⏹️ Stop talking'}
