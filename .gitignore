@@ -69,8 +69,13 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variables file
-.env.test
-.env.local
+.env
+.env.*
+!.env.example
+
+# Bundle analysis / build artifacts
+bundle-report.html
+stats.html
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -121,4 +126,7 @@ lib/
 .vscode
 .lh
 .history
-test/.DS_Store
+
+# macOS
+.DS_Store
+**/.DS_Store
