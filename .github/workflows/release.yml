@@ -17,6 +17,10 @@ jobs:
     steps:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v3
+        with:
+          # Full history and tags so semantic-release can determine the last
+          # released version instead of treating every run as a first release.
+          fetch-depth: 0
 
       - name: 🟦 Setup Node.js
         uses: actions/setup-node@v3
