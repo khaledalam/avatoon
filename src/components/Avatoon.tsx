@@ -87,7 +87,12 @@ const Avatoon = forwardRef<AvatoonHandle, AvatoonProps>(function Avatoon(
           <Environment preset="sunset" />
         </Suspense>
         <CameraFovAnimator readyToPlay={readyToPlay} baseFov={fov} />
-        <OrbitControls target={cameraTarget} enablePan enableZoom enableRotate />
+        <OrbitControls
+          target={cameraTarget}
+          enablePan
+          enableZoom
+          enableRotate
+        />
       </Canvas>
     </>
   );
