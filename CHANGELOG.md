@@ -1,3 +1,9 @@
+## [1.9.0](https://github.com/khaledalam/avatoon/compare/v1.8.1...v1.9.0) (2026-07-09)
+
+### Features
+
+* configurable Environment ([#1](https://github.com/khaledalam/avatoon/issues/1)), expose subcomponents ([#6](https://github.com/khaledalam/avatoon/issues/6)); lift coverage to ~80% ([891e2a5](https://github.com/khaledalam/avatoon/commit/891e2a543a96204fa16afed28518adecc7028e90))
+
 ## [1.8.1](https://github.com/khaledalam/avatoon/compare/v1.8.0...v1.8.1) (2026-07-09)
 
 ### Bug Fixes
