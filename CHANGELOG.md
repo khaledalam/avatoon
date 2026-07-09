@@ -1,3 +1,9 @@
+## [1.8.1](https://github.com/khaledalam/avatoon/compare/v1.8.0...v1.8.1) (2026-07-09)
+
+### Bug Fixes
+
+* stop and release avatar audio on unmount so switching modes doesn't overlap clips ([1488793](https://github.com/khaledalam/avatoon/commit/148879353613349aaa90dba528d0fffa9189ab72))
+
 ## [1.8.0](https://github.com/khaledalam/avatoon/compare/v1.7.0...v1.8.0) (2026-07-09)
 
 ### Features
