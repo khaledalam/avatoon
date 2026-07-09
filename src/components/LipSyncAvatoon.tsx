@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
+import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { clone as cloneSkeleton } from 'three/examples/jsm/utils/SkeletonUtils';
 import { AvatoonErrorBoundary } from './AvatoonErrorBoundary';
+import { SceneEnvironment } from './SceneEnvironment';
+import type { AvatoonEnvironmentProps } from '../types';
 import { phonemeToViseme } from '../constants/phonemeToViseme';
+import { blinkPulse } from '../utils/lipSync';
 
 function LipSyncModel({ url, isTalking }: { url: string; isTalking: boolean }) {
   const { scene: gltfScene } = useGLTF(url);
@@ -77,7 +80,7 @@ function LipSyncModel({ url, isTalking }: { url: string; isTalking: boolean }) {
 
     if (into >= 0) {
       if (into <= BLINK_DURATION) {
-        value = 1 - Math.abs((into / BLINK_DURATION) * 2 - 1);
+        value = blinkPulse(into, BLINK_DURATION);
       } else {
         bs.timer = 0;
         bs.nextAt = 2 + Math.random() * 3;
@@ -185,13 +188,16 @@ export default function LipSyncAvatoon({
   cameraPosition = [0, 1.45, 2.3],
   cameraTarget = [0, 1.35, 0],
   onError,
+  environmentPreset,
+  environmentFiles,
+  environmentBackground,
 }: {
   glbUrl?: string;
   fov?: number;
   cameraPosition?: [number, number, number];
   cameraTarget?: [number, number, number];
   onError?: (error: Error) => void;
-}) {
+} & AvatoonEnvironmentProps) {
   const [isTalking, setIsTalking] = useState(false);
 
   return (
@@ -212,7 +218,11 @@ export default function LipSyncAvatoon({
         <AvatoonErrorBoundary onError={onError}>
           <Suspense fallback={null}>
             <LipSyncModel url={glbUrl} isTalking={isTalking} />
-            <Environment preset="sunset" />
+            <SceneEnvironment
+              environmentPreset={environmentPreset}
+              environmentFiles={environmentFiles}
+              environmentBackground={environmentBackground}
+            />
           </Suspense>
         </AvatoonErrorBoundary>
         <OrbitControls

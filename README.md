@@ -144,6 +144,9 @@ npm run example
 | `fov`                 | `number`     | `24`         | Camera vertical field-of-view                          |
 | `cameraPosition`      | `[number, number, number]` | `[0, 1.45, 2.3]` | Camera position `[x, y, z]`             |
 | `cameraTarget`        | `[number, number, number]` | `[0, 1.35, 0]`   | OrbitControls look-at target `[x, y, z]` |
+| `environmentPreset`   | `EnvironmentPreset` | `"sunset"` | drei lighting preset (`city`, `dawn`, `night`, …) |
+| `environmentFiles`    | `string \| string[]` | `undefined` | Custom HDR/EXR file(s); overrides the preset |
+| `environmentBackground` | `boolean`  | `false`      | Render the environment as the scene background |
 
 > Tune `fov` / `cameraPosition` / `cameraTarget` to frame your own avatar model.
 > You can also drive playback imperatively via a [`ref`](#imperative-control-ref).
@@ -160,6 +163,12 @@ A lightweight, self-contained variant that drives procedural mouth movement
 | `cameraPosition` | `[number, number, number]` | `[0, 1.45, 2.3]` | Camera position `[x, y, z]`  |
 | `cameraTarget`   | `[number, number, number]` | `[0, 1.35, 0]`   | OrbitControls look-at target |
 | `onError`        | `(error: Error) => void` | `undefined` | Fired if the model fails to load |
+| `environmentPreset` / `environmentFiles` / `environmentBackground` | — | — | Same environment options as `Avatoon` |
+
+### Exposed building blocks
+
+For advanced composition you can also import the lower-level pieces:
+`AvatoonModel`, `CameraFovAnimator`, `SceneEnvironment`, and `AvatoonErrorBoundary`.
 
 ## 👤 Avatar Types
 - T1 (Static Face - Realistic)

@@ -34,6 +34,29 @@ export interface AvatoonModelProps {
   visemeJson?: VisemeData;
 }
 
+/** Built-in drei lighting/environment presets. */
+export type EnvironmentPreset =
+  | 'apartment'
+  | 'city'
+  | 'dawn'
+  | 'forest'
+  | 'lobby'
+  | 'night'
+  | 'park'
+  | 'studio'
+  | 'sunset'
+  | 'warehouse';
+
+/** Scene environment options shared by the avatar components. */
+export interface AvatoonEnvironmentProps {
+  /** drei `<Environment>` lighting preset. Defaults to `"sunset"`. */
+  environmentPreset?: EnvironmentPreset;
+  /** Custom HDR/EXR environment file(s). Overrides `environmentPreset`. */
+  environmentFiles?: string | string[];
+  /** Render the environment as the scene background. Defaults to `false`. */
+  environmentBackground?: boolean;
+}
+
 /** Camera framing options shared by the avatar components. */
 export interface AvatoonCameraProps {
   /** Perspective camera vertical field-of-view. Defaults to `17`. */
@@ -44,7 +67,9 @@ export interface AvatoonCameraProps {
   cameraTarget?: [number, number, number];
 }
 
-export interface AvatoonProps extends AvatoonCameraProps {
+export interface AvatoonProps
+  extends AvatoonCameraProps,
+    AvatoonEnvironmentProps {
   /** URL to the `.glb` avatar file (T1 or T2). */
   glbUrl: string;
   /** Goal-based motion preset. Defaults to `"Normal"`. */

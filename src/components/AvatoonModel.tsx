@@ -5,8 +5,9 @@ import * as THREE from 'three';
 import { Bone, Group, Object3D } from 'three';
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { clone as cloneSkeleton } from 'three/examples/jsm/utils/SkeletonUtils';
-import { AvatoonModelProps, RawVisemeEntry } from '../types';
+import { AvatoonModelProps } from '../types';
 import { phonemeToViseme } from '../constants/phonemeToViseme';
+import { parseVisemes, findActiveViseme, blinkPulse } from '../utils/lipSync';
 
 export function AvatoonModel({
   url,
@@ -60,14 +61,7 @@ export function AvatoonModel({
     const loadData = () => {
       if (!visemeJson) return;
 
-      const parsed = visemeJson.visemes
-        .map((entry: RawVisemeEntry) => ({
-          time: entry.time,
-          viseme: phonemeToViseme[entry.viseme || ''] || null,
-        }))
-        .filter(v => v.viseme !== null);
-
-      setVisemeData(parsed);
+      setVisemeData(parseVisemes(visemeJson, phonemeToViseme));
 
       if (
         visemeJson &&
@@ -206,8 +200,7 @@ export function AvatoonModel({
 
     if (into >= 0) {
       if (into <= BLINK_DURATION) {
-        // Triangular 0 -> 1 -> 0 pulse.
-        value = 1 - Math.abs((into / BLINK_DURATION) * 2 - 1);
+        value = blinkPulse(into, BLINK_DURATION);
       } else {
         bs.timer = 0;
         bs.nextAt = 2 + Math.random() * 3; // next blink in 2–5s
@@ -237,7 +230,7 @@ export function AvatoonModel({
     const currentTime = audioRef.current.currentTime;
 
     // Find the most recent viseme
-    const current = [...visemeData].reverse().find(v => v.time <= currentTime);
+    const current = findActiveViseme(visemeData, currentTime);
 
     if (!current || current.viseme === lastVisemeRef.current) return;
     lastVisemeRef.current = current.viseme;

@@ -6,10 +6,11 @@ import {
   type CSSProperties,
 } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Environment, OrbitControls } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import { AvatoonModel } from './AvatoonModel';
 import { CameraFovAnimator } from './CameraFovAnimator';
 import { AvatoonErrorBoundary } from './AvatoonErrorBoundary';
+import { SceneEnvironment } from './SceneEnvironment';
 import type { AvatoonProps, AvatoonHandle } from '../types';
 
 // Inline styles keep the component zero-config for consumers — no separate
@@ -42,6 +43,9 @@ const Avatoon = forwardRef<AvatoonHandle, AvatoonProps>(function Avatoon(
     fov = 24,
     cameraPosition = [0, 1.45, 2.3],
     cameraTarget = [0, 1.35, 0],
+    environmentPreset,
+    environmentFiles,
+    environmentBackground,
   },
   ref
 ) {
@@ -86,8 +90,11 @@ const Avatoon = forwardRef<AvatoonHandle, AvatoonProps>(function Avatoon(
               shouldPlay={readyToPlay}
               visemeJson={visemeJson}
             />
-            {/* <Environment files={'@assets/venice_sunset_1k.hdr'} background /> */}
-            <Environment preset="sunset" />
+            <SceneEnvironment
+              environmentPreset={environmentPreset}
+              environmentFiles={environmentFiles}
+              environmentBackground={environmentBackground}
+            />
           </Suspense>
         </AvatoonErrorBoundary>
         <CameraFovAnimator readyToPlay={readyToPlay} baseFov={fov} />
