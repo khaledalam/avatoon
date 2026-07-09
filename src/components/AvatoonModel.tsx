@@ -83,6 +83,17 @@ export function AvatoonModel({
     };
 
     loadData();
+
+    // Stop and release the audio when the model unmounts or the source
+    // changes, so remounting (e.g. switching goal) doesn't leave the old
+    // clip playing and overlapping with the new one.
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = '';
+        audioRef.current = null;
+      }
+    };
   }, [visemeJson]);
 
   useEffect(() => {
