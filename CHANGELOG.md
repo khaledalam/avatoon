@@ -1,3 +1,9 @@
+## [1.5.1](https://github.com/khaledalam/avatoon/compare/v1.5.0...v1.5.1) (2026-07-09)
+
+### Bug Fixes
+
+* clone GLTF scene per instance so multiple avatars on a page don't conflict ([3776751](https://github.com/khaledalam/avatoon/commit/3776751f4aa916ad4ed8413eca043694d81f4c25))
+
 ## [1.5.0](https://github.com/khaledalam/avatoon/compare/v1.4.1...v1.5.0) (2026-07-09)
 
 ### Features
