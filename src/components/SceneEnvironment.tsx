@@ -20,6 +20,9 @@ export function SceneEnvironment({
     );
   }
   return (
-    <Environment preset={environmentPreset} background={environmentBackground} />
+    <Environment
+      preset={environmentPreset}
+      background={environmentBackground}
+    />
   );
 }

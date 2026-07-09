@@ -68,8 +68,7 @@ export interface AvatoonCameraProps {
 }
 
 export interface AvatoonProps
-  extends AvatoonCameraProps,
-    AvatoonEnvironmentProps {
+  extends AvatoonCameraProps, AvatoonEnvironmentProps {
   /** URL to the `.glb` avatar file (T1 or T2). */
   glbUrl: string;
   /** Goal-based motion preset. Defaults to `"Normal"`. */
