@@ -1,9 +1,10 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { Bone, Group, Object3D } from 'three';
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
+import { clone as cloneSkeleton } from 'three/examples/jsm/utils/SkeletonUtils';
 import { AvatoonModelProps, RawVisemeEntry } from '../types';
 import { phonemeToViseme } from '../constants/phonemeToViseme';
 
@@ -25,7 +26,10 @@ export function AvatoonModel({
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const group = useRef<Group | null>(null);
-  const { scene } = useGLTF(url) as unknown as GLTF;
+  const { scene: gltfScene } = useGLTF(url) as unknown as GLTF;
+  // Clone per instance so multiple <Avatoon> using the same glbUrl don't fight
+  // over one shared scene object (a three.js object can only have one parent).
+  const scene = useMemo(() => cloneSkeleton(gltfScene), [gltfScene]);
 
   const leftArm = useRef<Object3D | null>(null);
   const leftHand = useRef<Object3D | null>(null);

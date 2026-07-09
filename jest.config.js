@@ -11,6 +11,8 @@ module.exports = {
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '^three/examples/jsm/utils/SkeletonUtils$':
+      '<rootDir>/test/__mocks__/skeletonUtils.ts',
   },
   setupFilesAfterEnv: ['./jest.setup.ts'],
 };

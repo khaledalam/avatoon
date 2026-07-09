@@ -1,11 +1,15 @@
-import React, { useState, useRef, useEffect, Suspense } from 'react';
+import { useState, useRef, useEffect, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
+import { clone as cloneSkeleton } from 'three/examples/jsm/utils/SkeletonUtils';
 import { phonemeToViseme } from '../constants/phonemeToViseme';
 
 function LipSyncModel({ url, isTalking }: { url: string; isTalking: boolean }) {
-  const { scene } = useGLTF(url);
+  const { scene: gltfScene } = useGLTF(url);
+  // Clone per instance so reusing the same glbUrl doesn't reparent one shared
+  // scene object away from another avatar on the page.
+  const scene = useMemo(() => cloneSkeleton(gltfScene), [gltfScene]);
   const mouthMeshes = useRef<
     { mesh: THREE.Mesh; visemes: Record<string, number> }[]
   >([]);
