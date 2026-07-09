@@ -1,9 +1,15 @@
-import { useState, Suspense, type CSSProperties } from 'react';
+import {
+  useState,
+  Suspense,
+  forwardRef,
+  useImperativeHandle,
+  type CSSProperties,
+} from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls } from '@react-three/drei';
 import { AvatoonModel } from './AvatoonModel';
 import { CameraFovAnimator } from './CameraFovAnimator';
-import type { AvatoonProps } from '../types';
+import type { AvatoonProps, AvatoonHandle } from '../types';
 
 // Inline styles keep the component zero-config for consumers — no separate
 // stylesheet import required (mirrors LipSyncAvatoon's approach).
@@ -24,15 +30,22 @@ const talkButtonStyle: CSSProperties = {
   zIndex: 999,
 };
 
-export default function Avatoon({
-  glbUrl,
-  goal,
-  onRenderComplete,
-  visemeJson,
-  showPlayVoiceButton = false,
-}: AvatoonProps) {
+const Avatoon = forwardRef<AvatoonHandle, AvatoonProps>(function Avatoon(
+  { glbUrl, goal, onRenderComplete, visemeJson, showPlayVoiceButton = false },
+  ref
+) {
   const [readyToPlay, setReadyToPlay] = useState(false);
   const [isFullyRendered, setIsFullyRendered] = useState(false);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      play: () => setReadyToPlay(true),
+      stop: () => setReadyToPlay(false),
+      toggle: () => setReadyToPlay(prev => !prev),
+    }),
+    []
+  );
 
   return (
     <>
@@ -69,4 +82,6 @@ export default function Avatoon({
       </Canvas>
     </>
   );
-}
+});
+
+export default Avatoon;

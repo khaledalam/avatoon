@@ -1,9 +1,10 @@
 import { Avatoon, LipSyncAvatoon } from '../src/index';
 
 describe('package entry point', () => {
-  it('exports the Avatoon component', () => {
+  it('exports the Avatoon component (forwardRef)', () => {
     expect(Avatoon).toBeDefined();
-    expect(typeof Avatoon).toBe('function');
+    // forwardRef components are objects; plain components are functions.
+    expect(['function', 'object']).toContain(typeof Avatoon);
   });
 
   it('exports the LipSyncAvatoon component', () => {

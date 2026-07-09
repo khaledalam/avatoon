@@ -9,6 +9,8 @@ function LipSyncModel({ url, isTalking }: { url: string; isTalking: boolean }) {
   const mouthMeshes = useRef<
     { mesh: THREE.Mesh; visemes: Record<string, number> }[]
   >([]);
+  const blinkMeshes = useRef<{ mesh: THREE.Mesh; indices: number[] }[]>([]);
+  const blinkState = useRef({ timer: 0, nextAt: 3, value: 0 });
   const head = useRef<THREE.Object3D | null>(null);
 
   // Traversal to find head and morph targets
@@ -34,9 +36,51 @@ function LipSyncModel({ url, isTalking }: { url: string; isTalking: boolean }) {
         if (Object.keys(visemes).length > 0) {
           mouthMeshes.current.push({ mesh, visemes });
         }
+
+        const blinkIndices = [
+          'eyeBlinkLeft',
+          'eyeBlinkRight',
+          'eyesClosed',
+          'blink',
+        ]
+          .map(key => dict[key])
+          .filter((i): i is number => i !== undefined);
+        if (blinkIndices.length > 0) {
+          blinkMeshes.current.push({ mesh, indices: blinkIndices });
+        }
       }
     });
   }, [scene]);
+
+  // Periodic eye-blinking (no-op if the model has no blink morphs).
+  useFrame((_, delta) => {
+    const meshes = blinkMeshes.current;
+    if (meshes.length === 0) return;
+
+    const bs = blinkState.current;
+    bs.timer += delta;
+
+    const BLINK_DURATION = 0.15;
+    const into = bs.timer - bs.nextAt;
+    let value = 0;
+
+    if (into >= 0) {
+      if (into <= BLINK_DURATION) {
+        value = 1 - Math.abs((into / BLINK_DURATION) * 2 - 1);
+      } else {
+        bs.timer = 0;
+        bs.nextAt = 2 + Math.random() * 3;
+      }
+    }
+
+    if (value !== bs.value) {
+      bs.value = value;
+      for (const { mesh, indices } of meshes) {
+        if (!mesh.morphTargetInfluences) continue;
+        for (const i of indices) mesh.morphTargetInfluences[i] = value;
+      }
+    }
+  });
 
   const state = useRef({
     nextChange: 0,

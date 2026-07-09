@@ -21,6 +21,8 @@
 ## ✨ Features
 - 🎤 Real-time lip-sync using phoneme-viseme mapping  
 - 🧍 Subtle head motion animation while talking  
+- 👁️ Automatic eye-blinking (when the model exposes blink morph targets)  
+- 🎛️ Imperative `play()` / `stop()` control via a `ref`  
 - 🌐 GLTF model support via `useGLTF`  
 - ⚛️ Plug-and-play with React Three Fiber + Drei  
 - 🎯 Goal-based gestures like "Muscle" or "Sleep"
@@ -94,6 +96,30 @@ export default function App() {
     <div style={{ width: "100%", height: 400 }}>
       <LipSyncAvatoon glbUrl="/avatar.glb" />
     </div>
+  );
+}
+```
+
+### Imperative control (ref)
+
+Drive playback from your own UI instead of the built-in button by passing a
+`ref` — it exposes `play()`, `stop()`, and `toggle()`:
+
+```jsx
+import { useRef } from "react";
+import { Avatoon, type AvatoonHandle } from "avatoon";
+
+function App() {
+  const avatar = useRef<AvatoonHandle>(null);
+
+  return (
+    <>
+      <button onClick={() => avatar.current?.play()}>Speak</button>
+      <button onClick={() => avatar.current?.stop()}>Stop</button>
+      <div style={{ width: "100%", height: 400 }}>
+        <Avatoon ref={avatar} glbUrl="/avatar.glb" visemeJson={visemeJson} />
+      </div>
+    </>
   );
 }
 ```

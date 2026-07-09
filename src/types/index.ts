@@ -1,6 +1,19 @@
 /** Goal-based motion preset applied to the avatar. */
 export type AvatoonGoal = 'Normal' | 'Muscle' | 'Sleep';
 
+/**
+ * Imperative handle exposed via a `ref` on `<Avatoon>`, for controlling
+ * voice playback from outside the component.
+ */
+export interface AvatoonHandle {
+  /** Start audio playback and lip-sync. */
+  play: () => void;
+  /** Stop audio playback and lip-sync. */
+  stop: () => void;
+  /** Toggle playback on/off. */
+  toggle: () => void;
+}
+
 export interface VisemeData {
   /** Time-ordered viseme keyframes (see the phoneme-to-viseme map). */
   visemes: Array<{ time: number; viseme: string | null }>;

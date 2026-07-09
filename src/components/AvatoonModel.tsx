@@ -42,6 +42,10 @@ export function AvatoonModel({
     { mesh: THREE.Mesh; visemes: Record<string, number> }[]
   >([]);
 
+  // Meshes carrying eye-blink morph targets (ARKit / Oculus / RPM naming).
+  const blinkMeshes = useRef<{ mesh: THREE.Mesh; indices: number[] }[]>([]);
+  const blinkState = useRef({ timer: 0, nextAt: 3, value: 0 });
+
   const lastVisemeRef = useRef<string | null>(null);
 
   const isBone = (obj: Object3D): obj is Bone => {
@@ -61,7 +65,12 @@ export function AvatoonModel({
 
       setVisemeData(parsed);
 
-      if (visemeJson && visemeJson.audio_base64) {
+      if (
+        visemeJson &&
+        visemeJson.audio_base64 &&
+        typeof window !== 'undefined' &&
+        typeof Audio !== 'undefined'
+      ) {
         const audio = new Audio(
           `data:audio/wav;base64,${visemeJson.audio_base64}`
         );
@@ -111,6 +120,19 @@ export function AvatoonModel({
           if (Object.keys(visemes).length > 0) {
             mouthMeshes.current.push({ mesh, visemes });
           }
+
+          // Collect eye-blink morph targets under any of the common names.
+          const blinkIndices = [
+            'eyeBlinkLeft',
+            'eyeBlinkRight',
+            'eyesClosed',
+            'blink',
+          ]
+            .map(key => morphDict[key])
+            .filter((i): i is number => i !== undefined);
+          if (blinkIndices.length > 0) {
+            blinkMeshes.current.push({ mesh, indices: blinkIndices });
+          }
         }
       }
 
@@ -154,6 +176,37 @@ export function AvatoonModel({
       }
     });
   }, [scene]);
+
+  // Natural, periodic eye-blinking (no-op if the model has no blink morphs).
+  useFrame((_, delta) => {
+    const meshes = blinkMeshes.current;
+    if (meshes.length === 0) return;
+
+    const bs = blinkState.current;
+    bs.timer += delta;
+
+    const BLINK_DURATION = 0.15; // seconds for a full close+open
+    const into = bs.timer - bs.nextAt;
+    let value = 0;
+
+    if (into >= 0) {
+      if (into <= BLINK_DURATION) {
+        // Triangular 0 -> 1 -> 0 pulse.
+        value = 1 - Math.abs((into / BLINK_DURATION) * 2 - 1);
+      } else {
+        bs.timer = 0;
+        bs.nextAt = 2 + Math.random() * 3; // next blink in 2–5s
+      }
+    }
+
+    if (value !== bs.value) {
+      bs.value = value;
+      for (const { mesh, indices } of meshes) {
+        if (!mesh.morphTargetInfluences) continue;
+        for (const i of indices) mesh.morphTargetInfluences[i] = value;
+      }
+    }
+  });
 
   useFrame(() => {
     if (!calledRef.current && scene && gl && !hasRendered) {
