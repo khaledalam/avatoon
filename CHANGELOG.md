@@ -1,3 +1,10 @@
+## [1.5.0](https://github.com/khaledalam/avatoon/compare/v1.4.1...v1.5.0) (2026-07-09)
+
+### Features
+
+* add imperative play/stop ref API, eye-blinking, and SSR-safe audio ([2704d72](https://github.com/khaledalam/avatoon/commit/2704d729b81456a3cc0240d654ea28f95cdcd43b))
+* **example:** redesign demo into a polished landing page with goal switcher ([b5cd52a](https://github.com/khaledalam/avatoon/commit/b5cd52a88c6871dab43f40597583490f3235df1e))
+
 ## [1.4.1](https://github.com/khaledalam/avatoon/compare/v1.4.0...v1.4.1) (2026-07-09)
 
 ### Bug Fixes
