@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/khaledalam/avatoon/compare/v1.5.1...v1.6.0) (2026-07-09)
+
+### Features
+
+* configurable camera framing with better defaults and arms-down LipSync pose ([3727021](https://github.com/khaledalam/avatoon/commit/37270214e66cc2872d5f4c586bf96ed47d133150))
+
 ## [1.5.1](https://github.com/khaledalam/avatoon/compare/v1.5.0...v1.5.1) (2026-07-09)
 
 ### Bug Fixes
