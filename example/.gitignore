@@ -22,3 +22,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Lockfile pins a non-reproducible local tarball hash — regenerated on install
+package-lock.json
