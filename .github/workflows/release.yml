@@ -3,6 +3,14 @@ name: 🚀 Publish to npm
 on:
   push:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig*.json'
+      - 'vite.config.mjs'
+      - '.releaserc'
+      - '.github/workflows/release.yml'
 
 jobs:
   release:
@@ -16,14 +24,14 @@ jobs:
 
     steps:
       - name: ⬇️ Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           # Full history and tags so semantic-release can determine the last
           # released version instead of treating every run as a first release.
           fetch-depth: 0
 
       - name: 🟦 Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 

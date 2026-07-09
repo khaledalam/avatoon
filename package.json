@@ -21,6 +21,7 @@
     "dev": "tsc --project tsconfig.build.json && vite build --watch",
     "clean": "rm -rf ./lib/",
     "lint": "eslint ./src/ --fix",
+    "lint:ci": "eslint ./src/",
     "typecheck": "tsc --noEmit",
     "test": "jest --coverage",
     "prepare": "husky install",
