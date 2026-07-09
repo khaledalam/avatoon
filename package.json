@@ -26,7 +26,8 @@
     "test": "jest --coverage",
     "prepare": "husky install",
     "example": "npm run build && npm run pack:local && cd example && npm install && npm run dev",
-    "pack:local": "rm -f avatoon-*.tgz avatoon.local.tgz && npm pack && cp avatoon-*.tgz avatoon.local.tgz"
+    "pack:local": "rm -f avatoon-*.tgz avatoon.local.tgz && npm pack && cp avatoon-*.tgz avatoon.local.tgz",
+    "compress:avatar": "npx --yes @gltf-transform/cli optimize example/public/avatar.glb example/public/avatar.glb --compress meshopt --simplify false"
   },
   "sideEffects": false,
   "keywords": [
