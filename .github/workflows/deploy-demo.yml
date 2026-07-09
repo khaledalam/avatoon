@@ -43,7 +43,7 @@ jobs:
       - name: 🔨 Build & pack library
         run: |
           npm run build
-          npm pack
+          npm run pack:local
 
       - name: 📦 Install demo dependencies
         working-directory: example

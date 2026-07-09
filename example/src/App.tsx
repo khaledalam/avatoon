@@ -1,5 +1,5 @@
-import React from 'react';
-import { Avatoon, LipSyncAvatoon } from 'avatoon';
+import { useState } from 'react';
+import { Avatoon, LipSyncAvatoon, type AvatoonGoal } from 'avatoon';
 import './App.css';
 import visemeJson from './visemeData.json';
 
@@ -7,26 +7,112 @@ import visemeJson from './visemeData.json';
 // (served from the /avatoon/ subpath) as well as locally.
 const avatarUrl = `${import.meta.env.BASE_URL}avatar.glb`;
 
+const GITHUB_URL = 'https://github.com/khaledalam/avatoon';
+const NPM_URL = 'https://www.npmjs.com/package/avatoon';
+
+const GOALS: AvatoonGoal[] = ['Normal', 'Muscle', 'Sleep'];
+
 function App() {
+  const [goal, setGoal] = useState<AvatoonGoal>('Normal');
+  const [copied, setCopied] = useState(false);
+
+  const copyInstall = () => {
+    navigator.clipboard?.writeText('npm install avatoon').then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  };
+
   return (
-    <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '20px', paddingBottom: '50px' }}>
-      <h1>Original Avatoon</h1>
-      <div style={{ height: '400px' }}>
-        <Avatoon
-          glbUrl={avatarUrl}
-          goal={'Normal'}
-          onRenderComplete={() => console.log('Render Completed!')}
-          visemeJson={visemeJson}
-          showPlayVoiceButton={true}
-        />
-      </div>
+    <div className="page">
+      <header className="hero">
+        <h1 className="hero__title">
+          <span aria-hidden>🧠</span> Avatoon
+        </h1>
+        <p className="hero__tagline">
+          Animated 3D avatars with real-time, viseme-driven lip-sync for{' '}
+          <strong>React Three Fiber</strong>.
+        </p>
 
-      <hr style={{ width: '100%', margin: '20px 0' }} />
+        <button className="install" onClick={copyInstall} title="Copy to clipboard">
+          <code>npm install avatoon</code>
+          <span className="install__hint">{copied ? '✓ copied' : '📋'}</span>
+        </button>
 
-      <h1>Lip Sync Only (No Audio)</h1>
-      <div style={{ height: '400px' }}>
-        <LipSyncAvatoon glbUrl={avatarUrl} />
-      </div>
+        <div className="hero__cta">
+          <a className="btn btn--primary" href={GITHUB_URL} target="_blank" rel="noreferrer">
+            ⭐ Star on GitHub
+          </a>
+          <a className="btn" href={NPM_URL} target="_blank" rel="noreferrer">
+            📦 View on npm
+          </a>
+        </div>
+      </header>
+
+      <main className="demos">
+        <section className="card">
+          <div className="card__head">
+            <h2>Audio-synced lip-sync</h2>
+            <p>
+              The <code>&lt;Avatoon&gt;</code> component plays audio and drives mouth
+              shapes from a <code>visemeJson</code> timeline. Try a gesture preset:
+            </p>
+            <div className="goals" role="group" aria-label="Gesture preset">
+              {GOALS.map(g => (
+                <button
+                  key={g}
+                  className={`chip${goal === g ? ' chip--active' : ''}`}
+                  onClick={() => setGoal(g)}
+                >
+                  {g}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="stage">
+            <Avatoon
+              key={goal}
+              glbUrl={avatarUrl}
+              goal={goal}
+              visemeJson={visemeJson}
+              showPlayVoiceButton
+              onRenderComplete={() => console.log('Render complete')}
+            />
+          </div>
+        </section>
+
+        <section className="card">
+          <div className="card__head">
+            <h2>Procedural lip-sync</h2>
+            <p>
+              The lightweight <code>&lt;LipSyncAvatoon&gt;</code> animates a natural
+              talking mouth with no audio or viseme data — just hit play.
+            </p>
+          </div>
+          <div className="stage stage--muted">
+            <LipSyncAvatoon glbUrl={avatarUrl} />
+          </div>
+        </section>
+      </main>
+
+      <footer className="footer">
+        <span>
+          Built by{' '}
+          <a href="https://khaledalam.net/" target="_blank" rel="noreferrer">
+            Khaled Alam
+          </a>
+        </span>
+        <span className="dot">·</span>
+        <a href={GITHUB_URL} target="_blank" rel="noreferrer">
+          GitHub
+        </a>
+        <span className="dot">·</span>
+        <a href={NPM_URL} target="_blank" rel="noreferrer">
+          npm
+        </a>
+        <span className="dot">·</span>
+        <span>MIT License</span>
+      </footer>
     </div>
   );
 }

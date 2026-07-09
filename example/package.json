@@ -11,7 +11,7 @@
   "dependencies": {
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
-    "avatoon": "file:../avatoon-1.0.0.tgz",
+    "avatoon": "file:../avatoon.local.tgz",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "three": "^0.160.1"
