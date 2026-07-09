@@ -1,3 +1,9 @@
+## [1.8.0](https://github.com/khaledalam/avatoon/compare/v1.7.0...v1.8.0) (2026-07-09)
+
+### Features
+
+* add Azure/Polly/Rhubarb viseme converters and fix/expand the viseme map ([3489c17](https://github.com/khaledalam/avatoon/commit/3489c17cbae19a92b1d4d17cda2a51cfe56eb36e))
+
 ## [1.7.0](https://github.com/khaledalam/avatoon/compare/v1.6.0...v1.7.0) (2026-07-09)
 
 ### Features
