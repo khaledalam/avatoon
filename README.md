@@ -225,6 +225,17 @@ setup and development workflow, and please review our
 [SECURITY.md](./SECURITY.md).
 
 
+## 💖 Support
+
+If Avatoon is useful to you, consider supporting its development — it helps a lot
+and keeps the project maintained:
+
+- ⭐ **Star the repo** — the easiest way to help
+- 💛 [**Sponsor on GitHub**](https://github.com/sponsors/khaledalam)
+- ☕ [**Buy Me a Coffee**](https://www.buymeacoffee.com/khaledalam)
+- 💵 [**PayPal**](https://paypal.me/khaledalam)
+
+
 ## 📄 License
 
 [MIT](./LICENSE) © [Khaled Alam](https://khaledalam.net/)

@@ -9,6 +9,7 @@ const avatarUrl = `${import.meta.env.BASE_URL}avatar.glb`;
 
 const GITHUB_URL = 'https://github.com/khaledalam/avatoon';
 const NPM_URL = 'https://www.npmjs.com/package/avatoon';
+const SPONSOR_URL = 'https://github.com/sponsors/khaledalam';
 
 const GOALS: AvatoonGoal[] = ['Normal', 'Muscle', 'Sleep'];
 
@@ -45,6 +46,9 @@ function App() {
           </a>
           <a className="btn" href={NPM_URL} target="_blank" rel="noreferrer">
             📦 View on npm
+          </a>
+          <a className="btn btn--sponsor" href={SPONSOR_URL} target="_blank" rel="noreferrer">
+            💖 Sponsor
           </a>
         </div>
       </header>
@@ -109,6 +113,10 @@ function App() {
         <span className="dot">·</span>
         <a href={NPM_URL} target="_blank" rel="noreferrer">
           npm
+        </a>
+        <span className="dot">·</span>
+        <a href={SPONSOR_URL} target="_blank" rel="noreferrer">
+          Sponsor 💖
         </a>
         <span className="dot">·</span>
         <span>MIT License</span>

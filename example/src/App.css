@@ -118,6 +118,16 @@ body {
   border-color: transparent;
 }
 
+.btn--sponsor {
+  border-color: #ea4aaa;
+  color: #ea4aaa;
+}
+
+.btn--sponsor:hover {
+  background: #ea4aaa;
+  color: #ffffff;
+}
+
 /* ---------- Demo cards ---------- */
 .demos {
   display: grid;
