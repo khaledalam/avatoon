@@ -1,3 +1,14 @@
+## [1.7.0](https://github.com/khaledalam/avatoon/compare/v1.6.0...v1.7.0) (2026-07-09)
+
+### Features
+
+* add onError prop with an error boundary so a bad glbUrl won't crash the host app ([e6d3e10](https://github.com/khaledalam/avatoon/commit/e6d3e10f7d4d54dd5f69ee0973bf72af1b5116b8))
+
+### Performance Improvements
+
+* compress placeholder avatar asset 12.3MB to 3.6MB ([d61cf16](https://github.com/khaledalam/avatoon/commit/d61cf16a0a1a25ea1413b6f2830a74c37c0302b6))
+* **example:** meshopt-compress demo avatar 12.3MB to 3.6MB (visemes preserved) ([f579b1f](https://github.com/khaledalam/avatoon/commit/f579b1fea3eb561134caa6eb92679265f11a8077))
+
 ## [1.6.0](https://github.com/khaledalam/avatoon/compare/v1.5.1...v1.6.0) (2026-07-09)
 
 ### Features
