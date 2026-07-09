@@ -1,3 +1,9 @@
+## [1.4.1](https://github.com/khaledalam/avatoon/compare/v1.4.0...v1.4.1) (2026-07-09)
+
+### Bug Fixes
+
+* consume packed tarball in demo to dedupe React and pin three/TS ([11089e1](https://github.com/khaledalam/avatoon/commit/11089e1438e1f4149675ce6a34ac27de8fb71724))
+
 ## 1.0.0 (2026-07-08)
 
 ### Features
