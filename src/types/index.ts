@@ -51,6 +51,8 @@ export interface AvatoonProps extends AvatoonCameraProps {
   goal?: AvatoonGoal | null;
   /** Fired once when the avatar has finished its first render. */
   onRenderComplete?: () => void;
+  /** Fired if the avatar model fails to load (e.g. a bad `glbUrl`). */
+  onError?: (error: Error) => void;
   /** Viseme keyframes (and optional audio) used to drive lip-sync. */
   visemeJson?: VisemeData;
   /** Render a built-in play/stop voice button in the scene. Defaults to `false`. */

@@ -138,6 +138,7 @@ npm run example
 | `glbUrl`              | `string`     | *(required)* | URL to the `.glb` avatar file (T1 or T2)               |
 | `goal`                | `AvatoonGoal`| `"Normal"`   | Motion preset: `"Normal"`, `"Muscle"`, or `"Sleep"`    |
 | `onRenderComplete`    | `() => void` | `undefined`  | Callback fired when avatar finishes rendering          |
+| `onError`             | `(error: Error) => void` | `undefined` | Fired if the model fails to load (bad `glbUrl`) instead of crashing |
 | `visemeJson`          | `VisemeData` | `undefined`  | JSON structure for syncing visemes with audio playback |
 | `showPlayVoiceButton` | `boolean`    | `false`      | If true, renders a play/stop voice button in the scene |
 | `fov`                 | `number`     | `24`         | Camera vertical field-of-view                          |
@@ -158,6 +159,7 @@ A lightweight, self-contained variant that drives procedural mouth movement
 | `fov`            | `number` | `24`           | Camera vertical field-of-view        |
 | `cameraPosition` | `[number, number, number]` | `[0, 1.45, 2.3]` | Camera position `[x, y, z]`  |
 | `cameraTarget`   | `[number, number, number]` | `[0, 1.35, 0]`   | OrbitControls look-at target |
+| `onError`        | `(error: Error) => void` | `undefined` | Fired if the model fails to load |
 
 ## 👤 Avatar Types
 - T1 (Static Face - Realistic)

@@ -9,6 +9,7 @@ import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls } from '@react-three/drei';
 import { AvatoonModel } from './AvatoonModel';
 import { CameraFovAnimator } from './CameraFovAnimator';
+import { AvatoonErrorBoundary } from './AvatoonErrorBoundary';
 import type { AvatoonProps, AvatoonHandle } from '../types';
 
 // Inline styles keep the component zero-config for consumers — no separate
@@ -35,6 +36,7 @@ const Avatoon = forwardRef<AvatoonHandle, AvatoonProps>(function Avatoon(
     glbUrl,
     goal,
     onRenderComplete,
+    onError,
     visemeJson,
     showPlayVoiceButton = false,
     fov = 24,
@@ -72,20 +74,22 @@ const Avatoon = forwardRef<AvatoonHandle, AvatoonProps>(function Avatoon(
         camera={{ position: cameraPosition, fov }}
       >
         <ambientLight intensity={0.6} />
-        <Suspense fallback={null}>
-          <AvatoonModel
-            url={glbUrl}
-            goal={goal}
-            onRenderComplete={() => {
-              setIsFullyRendered(true);
-              onRenderComplete?.();
-            }}
-            shouldPlay={readyToPlay}
-            visemeJson={visemeJson}
-          />
-          {/* <Environment files={'@assets/venice_sunset_1k.hdr'} background /> */}
-          <Environment preset="sunset" />
-        </Suspense>
+        <AvatoonErrorBoundary onError={onError}>
+          <Suspense fallback={null}>
+            <AvatoonModel
+              url={glbUrl}
+              goal={goal}
+              onRenderComplete={() => {
+                setIsFullyRendered(true);
+                onRenderComplete?.();
+              }}
+              shouldPlay={readyToPlay}
+              visemeJson={visemeJson}
+            />
+            {/* <Environment files={'@assets/venice_sunset_1k.hdr'} background /> */}
+            <Environment preset="sunset" />
+          </Suspense>
+        </AvatoonErrorBoundary>
         <CameraFovAnimator readyToPlay={readyToPlay} baseFov={fov} />
         <OrbitControls
           target={cameraTarget}

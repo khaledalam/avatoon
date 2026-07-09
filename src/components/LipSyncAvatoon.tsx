@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { clone as cloneSkeleton } from 'three/examples/jsm/utils/SkeletonUtils';
+import { AvatoonErrorBoundary } from './AvatoonErrorBoundary';
 import { phonemeToViseme } from '../constants/phonemeToViseme';
 
 function LipSyncModel({ url, isTalking }: { url: string; isTalking: boolean }) {
@@ -183,11 +184,13 @@ export default function LipSyncAvatoon({
   fov = 24,
   cameraPosition = [0, 1.45, 2.3],
   cameraTarget = [0, 1.35, 0],
+  onError,
 }: {
   glbUrl?: string;
   fov?: number;
   cameraPosition?: [number, number, number];
   cameraTarget?: [number, number, number];
+  onError?: (error: Error) => void;
 }) {
   const [isTalking, setIsTalking] = useState(false);
 
@@ -206,10 +209,12 @@ export default function LipSyncAvatoon({
         style={{ borderRadius: '8px' }}
       >
         <ambientLight intensity={0.6} />
-        <Suspense fallback={null}>
-          <LipSyncModel url={glbUrl} isTalking={isTalking} />
-          <Environment preset="sunset" />
-        </Suspense>
+        <AvatoonErrorBoundary onError={onError}>
+          <Suspense fallback={null}>
+            <LipSyncModel url={glbUrl} isTalking={isTalking} />
+            <Environment preset="sunset" />
+          </Suspense>
+        </AvatoonErrorBoundary>
         <OrbitControls
           target={cameraTarget}
           enablePan={false}
