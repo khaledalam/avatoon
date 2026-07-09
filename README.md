@@ -203,6 +203,10 @@ rest the mouth.
 | `K`        | "*oo*", "*u*"                 |
 | `H` / `X`  | silence / rest                |
 
+The standard **Oculus / Ready Player Me viseme names** are also accepted as codes
+directly — `sil`, `PP`, `FF`, `TH`, `DD`, `kk`, `CH`, `SS`, `nn`, `RR`, `aa`,
+`E`, `I`, `O`, `U` — which is what the converter helpers below emit.
+
 Entries must be ordered by ascending `time`. Optionally provide the spoken audio
 as a base64-encoded WAV via `audio_base64` to play it in sync (used when
 `showPlayVoiceButton` is enabled).
@@ -219,9 +223,32 @@ as a base64-encoded WAV via `audio_base64` to play it in sync (used when
 }
 ```
 
-You can produce this timing from any speech engine that emits phoneme/viseme
-timestamps (e.g. a text-to-speech service with viseme output) by mapping its
-events onto the codes above.
+### From a speech engine
+
+Rather than hand-authoring the timeline, generate it from a TTS/lip-sync engine.
+Avatoon ships converters for the most common sources:
+
+```js
+import {
+  Avatoon,
+  fromAzureVisemes,   // Azure Speech SDK viseme events
+  fromPollySpeechMarks, // AWS Polly speech marks
+  fromRhubarb,        // Rhubarb Lip Sync JSON
+} from "avatoon";
+
+// Azure: collect events from the Speech SDK's `visemeReceived` callback
+const visemeJson = fromAzureVisemes(azureEvents); // [{ visemeId, audioOffset }]
+
+// AWS Polly: pass the `viseme` speech marks
+const visemeJson = fromPollySpeechMarks(pollyMarks); // [{ time, value, type }]
+
+// Rhubarb: pass its JSON output (or just the mouthCues array)
+const visemeJson = fromRhubarb(rhubarbOutput); // { mouthCues: [{ start, end, value }] }
+```
+
+Each returns a `VisemeData` object ready to hand to `<Avatoon visemeJson={...} />`.
+Times are normalized to seconds. Add `audio_base64` yourself if you want synced
+playback.
 
 > **Model requirement (T2):** audio-synced lip-sync needs a `.glb` whose mesh
 > exposes `viseme_*` morph targets (ARKit / Oculus / Ready Player Me naming —

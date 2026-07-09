@@ -6,3 +6,15 @@ export type {
   AvatoonHandle,
   VisemeData,
 } from './types';
+
+export {
+  fromAzureVisemes,
+  fromPollySpeechMarks,
+  fromRhubarb,
+} from './converters/visemeConverters';
+export type {
+  AzureVisemeEvent,
+  PollySpeechMark,
+  RhubarbMouthCue,
+  RhubarbOutput,
+} from './converters/visemeConverters';
