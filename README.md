@@ -31,6 +31,25 @@
 npm install avatoon
 ```
 
+### Requirements (peer dependencies)
+
+Avatoon builds on React and the React Three Fiber ecosystem. Install these
+alongside it if your project doesn't already have them:
+
+```bash
+npm install react react-dom three @react-three/fiber @react-three/drei
+```
+
+| Peer dependency       | Supported version |
+| --------------------- | ----------------- |
+| `react` / `react-dom` | `>=18`            |
+| `three`               | `>=0.153.0`       |
+| `@react-three/fiber`  | `>=8.0.0`         |
+| `@react-three/drei`   | `>=9.0.0`         |
+
+> Runs in any browser with WebGL support. Written in TypeScript — type
+> definitions ship with the package.
+
 ## 🚀 Usage
 
 ### `Avatoon` — full avatar with audio-synced lip-sync
@@ -91,7 +110,7 @@ npm run example
 | Prop                  | Type         | Default      | Description                                            |
 | --------------------- | ------------ | ------------ | ------------------------------------------------------ |
 | `glbUrl`              | `string`     | *(required)* | URL to the `.glb` avatar file (T1 or T2)               |
-| `goal`                | `string`     | `"Normal"`   | Goal-based motion preset: `"Muscle"`, `"Sleep"`, etc.  |
+| `goal`                | `AvatoonGoal`| `"Normal"`   | Motion preset: `"Normal"`, `"Muscle"`, or `"Sleep"`    |
 | `onRenderComplete`    | `() => void` | `undefined`  | Callback fired when avatar finishes rendering          |
 | `visemeJson`          | `VisemeData` | `undefined`  | JSON structure for syncing visemes with audio playback |
 | `showPlayVoiceButton` | `boolean`    | `false`      | If true, renders a play/stop voice button in the scene |
@@ -110,12 +129,12 @@ A lightweight, self-contained variant that drives procedural mouth movement
     - Most photorealistic
     - No facial morphing
     - Lightweight
-    - <img src="https://raw.githubusercontent.com/khaledalam/avatoon/main//test/assets/V1_bg.jpg" width="100"/>
+    - <img src="https://raw.githubusercontent.com/khaledalam/avatoon/main/test/assets/V1_bg.jpg" width="100"/>
 - T2 (Blendshape Face - Expressive)
   - Separate eyeballs and mouth
   - Supports morph targets / ARKit visemes
   - Slightly less realistic but animatable
-  - <img src="https://raw.githubusercontent.com/khaledalam/avatoon/main//test/assets/V2_bg.jpg" width="100"/>
+  - <img src="https://raw.githubusercontent.com/khaledalam/avatoon/main/test/assets/V2_bg.jpg" width="100"/>
 
 ## 📘 Types
 
@@ -126,12 +145,63 @@ interface VisemeData {
 }
 ```
 
+## 🎚️ Generating viseme data
+
+`visemeJson` is what drives the mouth animation. Each entry pairs a **`time`**
+(in seconds, from the start of the audio) with a single-letter **viseme code**.
+Codes are mapped onto the model's morph targets; unknown or silent codes simply
+rest the mouth.
+
+| Code       | Mouth shape / example sound   |
+| ---------- | ----------------------------- |
+| `A`        | open — "**a**" as in *apple*  |
+| `B`        | lips together — *p, b, m*     |
+| `C`        | *ch, sh, j*                   |
+| `D`        | *d, t, th*                    |
+| `E`        | "*eh*", "*ae*"                |
+| `F`        | *f, v*                        |
+| `G`        | *g, k*                        |
+| `I`        | "*ee*"                        |
+| `J`        | *r, l, y*                     |
+| `K`        | "*oo*", "*u*"                 |
+| `H` / `X`  | silence / rest                |
+
+Entries must be ordered by ascending `time`. Optionally provide the spoken audio
+as a base64-encoded WAV via `audio_base64` to play it in sync (used when
+`showPlayVoiceButton` is enabled).
+
+```jsonc
+{
+  "visemes": [
+    { "time": 0.00, "viseme": "X" },
+    { "time": 0.12, "viseme": "B" },
+    { "time": 0.20, "viseme": "A" },
+    { "time": 0.35, "viseme": "I" }
+  ],
+  "audio_base64": "UklGR... (optional WAV)"
+}
+```
+
+You can produce this timing from any speech engine that emits phoneme/viseme
+timestamps (e.g. a text-to-speech service with viseme output) by mapping its
+events onto the codes above.
+
+> **Model requirement (T2):** audio-synced lip-sync needs a `.glb` whose mesh
+> exposes `viseme_*` morph targets (ARKit / Oculus / Ready Player Me naming —
+> e.g. `viseme_aa`, `viseme_PP`, `viseme_CH`). T1 models have no morph targets,
+> so use `LipSyncAvatoon` or head-motion only.
+
 
 ## 🤝 Contribution
 Pull requests are welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md) for local
 setup and development workflow, and please review our
 [Code of Conduct](./CODE_OF_CONDUCT.md). To report a security issue, see
 [SECURITY.md](./SECURITY.md).
+
+
+## 📄 License
+
+[MIT](./LICENSE) © [Khaled Alam](https://khaledalam.net/)
 
 
 ## 🛡️ Author
