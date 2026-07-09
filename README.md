@@ -1,10 +1,15 @@
 # 🧠 Avatoon
 
 
-[![npm package][npm-img]][npm-url]
+[![npm version][npm-img]][npm-url]
+[![npm downloads][downloads-img]][npm-url]
+[![minzipped size][size-img]][size-url]
 [![Build Status][build-img]][build-url]
-[![Issues][issues-img]][issues-url]
 [![Code Coverage][codecov-img]][codecov-url]
+[![TypeScript][types-img]][npm-url]
+[![License][license-img]][license-url]
+[![GitHub stars][stars-img]][stars-url]
+[![Sponsor][sponsor-img]][sponsor-url]
 
 
 **Avatoon** is a lightweight React Three Fiber component for rendering animated 3D avatars with real-time viseme-driven lip-sync. It supports lifelike head movements, morph target control, and optional goal-based gestures (e.g., flexing, sleeping), making it ideal for voice assistants, interactive characters, or storytelling apps.
@@ -299,7 +304,15 @@ and keeps the project maintained:
 [build-url]:https://github.com/khaledalam/avatoon/actions/workflows/release.yml
 [npm-img]:https://img.shields.io/npm/v/avatoon
 [npm-url]:https://www.npmjs.com/package/avatoon
-[issues-img]:https://img.shields.io/github/issues/khaledalam/avatoon
-[issues-url]:https://github.com/khaledalam/avatoon/issues
+[downloads-img]:https://img.shields.io/npm/dm/avatoon
+[size-img]:https://img.shields.io/bundlejs/size/avatoon
+[size-url]:https://bundlejs.com/?q=avatoon
+[types-img]:https://img.shields.io/npm/types/avatoon
+[license-img]:https://img.shields.io/npm/l/avatoon
+[license-url]:https://github.com/khaledalam/avatoon/blob/main/LICENSE
+[stars-img]:https://img.shields.io/github/stars/khaledalam/avatoon?style=flat
+[stars-url]:https://github.com/khaledalam/avatoon/stargazers
+[sponsor-img]:https://img.shields.io/badge/%E2%9D%A4-Sponsor-ea4aaa
+[sponsor-url]:https://github.com/sponsors/khaledalam
 [codecov-img]:https://codecov.io/gh/khaledalam/avatoon/branch/main/graph/badge.svg
 [codecov-url]:https://codecov.io/gh/khaledalam/avatoon
