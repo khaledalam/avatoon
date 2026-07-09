@@ -34,7 +34,17 @@ export interface AvatoonModelProps {
   visemeJson?: VisemeData;
 }
 
-export interface AvatoonProps {
+/** Camera framing options shared by the avatar components. */
+export interface AvatoonCameraProps {
+  /** Perspective camera vertical field-of-view. Defaults to `17`. */
+  fov?: number;
+  /** Camera position `[x, y, z]`. Defaults to `[0, 1.5, 2.2]`. */
+  cameraPosition?: [number, number, number];
+  /** OrbitControls look-at target `[x, y, z]`. Defaults to `[0, 1.2, 0]`. */
+  cameraTarget?: [number, number, number];
+}
+
+export interface AvatoonProps extends AvatoonCameraProps {
   /** URL to the `.glb` avatar file (T1 or T2). */
   glbUrl: string;
   /** Goal-based motion preset. Defaults to `"Normal"`. */

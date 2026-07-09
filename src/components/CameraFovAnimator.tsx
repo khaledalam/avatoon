@@ -2,13 +2,22 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useEffect, useState } from 'react';
 import * as THREE from 'three';
 
-export function CameraFovAnimator({ readyToPlay }: { readyToPlay: boolean }) {
+export function CameraFovAnimator({
+  readyToPlay,
+  baseFov = 24,
+}: {
+  readyToPlay: boolean;
+  baseFov?: number;
+}) {
   const { camera } = useThree();
-  const [targetFov, setTargetFov] = useState(readyToPlay ? 17 : 15);
+  // Zoom in slightly (base − 2) when idle, back to base when playing.
+  const [targetFov, setTargetFov] = useState(
+    readyToPlay ? baseFov : baseFov - 2
+  );
 
   useEffect(() => {
-    setTargetFov(readyToPlay ? 17 : 15);
-  }, [readyToPlay]);
+    setTargetFov(readyToPlay ? baseFov : baseFov - 2);
+  }, [readyToPlay, baseFov]);
 
   useFrame(() => {
     if (camera instanceof THREE.PerspectiveCamera) {

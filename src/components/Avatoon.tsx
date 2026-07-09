@@ -31,7 +31,16 @@ const talkButtonStyle: CSSProperties = {
 };
 
 const Avatoon = forwardRef<AvatoonHandle, AvatoonProps>(function Avatoon(
-  { glbUrl, goal, onRenderComplete, visemeJson, showPlayVoiceButton = false },
+  {
+    glbUrl,
+    goal,
+    onRenderComplete,
+    visemeJson,
+    showPlayVoiceButton = false,
+    fov = 24,
+    cameraPosition = [0, 1.45, 2.3],
+    cameraTarget = [0, 1.35, 0],
+  },
   ref
 ) {
   const [readyToPlay, setReadyToPlay] = useState(false);
@@ -60,7 +69,7 @@ const Avatoon = forwardRef<AvatoonHandle, AvatoonProps>(function Avatoon(
 
       <Canvas
         data-testid="avatoon-canvas"
-        camera={{ position: [0, 1.5, 2.2], fov: 17 }}
+        camera={{ position: cameraPosition, fov }}
       >
         <ambientLight intensity={0.6} />
         <Suspense fallback={null}>
@@ -77,8 +86,8 @@ const Avatoon = forwardRef<AvatoonHandle, AvatoonProps>(function Avatoon(
           {/* <Environment files={'@assets/venice_sunset_1k.hdr'} background /> */}
           <Environment preset="sunset" />
         </Suspense>
-        <CameraFovAnimator readyToPlay={readyToPlay} />
-        <OrbitControls target={[0, 1.2, 0]} enablePan enableZoom enableRotate />
+        <CameraFovAnimator readyToPlay={readyToPlay} baseFov={fov} />
+        <OrbitControls target={cameraTarget} enablePan enableZoom enableRotate />
       </Canvas>
     </>
   );

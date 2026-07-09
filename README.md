@@ -140,15 +140,24 @@ npm run example
 | `onRenderComplete`    | `() => void` | `undefined`  | Callback fired when avatar finishes rendering          |
 | `visemeJson`          | `VisemeData` | `undefined`  | JSON structure for syncing visemes with audio playback |
 | `showPlayVoiceButton` | `boolean`    | `false`      | If true, renders a play/stop voice button in the scene |
+| `fov`                 | `number`     | `24`         | Camera vertical field-of-view                          |
+| `cameraPosition`      | `[number, number, number]` | `[0, 1.45, 2.3]` | Camera position `[x, y, z]`             |
+| `cameraTarget`        | `[number, number, number]` | `[0, 1.35, 0]`   | OrbitControls look-at target `[x, y, z]` |
+
+> Tune `fov` / `cameraPosition` / `cameraTarget` to frame your own avatar model.
+> You can also drive playback imperatively via a [`ref`](#imperative-control-ref).
 
 ### `LipSyncAvatoon(props)`
 
 A lightweight, self-contained variant that drives procedural mouth movement
 (no `visemeJson` or audio needed) and renders its own Start/Stop button.
 
-| Prop     | Type     | Default        | Description                          |
-| -------- | -------- | -------------- | ------------------------------------ |
-| `glbUrl` | `string` | `"/avatar.glb"` | URL to the `.glb` avatar file (T2)  |
+| Prop             | Type     | Default        | Description                          |
+| ---------------- | -------- | -------------- | ------------------------------------ |
+| `glbUrl`         | `string` | `"/avatar.glb"` | URL to the `.glb` avatar file (T2)  |
+| `fov`            | `number` | `24`           | Camera vertical field-of-view        |
+| `cameraPosition` | `[number, number, number]` | `[0, 1.45, 2.3]` | Camera position `[x, y, z]`  |
+| `cameraTarget`   | `[number, number, number]` | `[0, 1.35, 0]`   | OrbitControls look-at target |
 
 ## 👤 Avatar Types
 - T1 (Static Face - Realistic)

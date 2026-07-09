@@ -25,6 +25,12 @@ function LipSyncModel({ url, isTalking }: { url: string; isTalking: boolean }) {
         head.current = obj;
       }
 
+      // Lower the arms out of the default T-pose into a natural resting pose.
+      const lname = obj.name.toLowerCase();
+      if (lname.includes('leftarm') || lname.includes('rightarm')) {
+        obj.quaternion.setFromEuler(new THREE.Euler(Math.PI / 2, 0, 0));
+      }
+
       const mesh = obj as THREE.Mesh;
       if (mesh.isMesh && mesh.morphTargetDictionary) {
         const dict = mesh.morphTargetDictionary;
@@ -174,8 +180,14 @@ function LipSyncModel({ url, isTalking }: { url: string; isTalking: boolean }) {
 
 export default function LipSyncAvatoon({
   glbUrl = '/avatar.glb',
+  fov = 24,
+  cameraPosition = [0, 1.45, 2.3],
+  cameraTarget = [0, 1.35, 0],
 }: {
   glbUrl?: string;
+  fov?: number;
+  cameraPosition?: [number, number, number];
+  cameraTarget?: [number, number, number];
 }) {
   const [isTalking, setIsTalking] = useState(false);
 
@@ -190,7 +202,7 @@ export default function LipSyncAvatoon({
       }}
     >
       <Canvas
-        camera={{ position: [0, 1.5, 2.2], fov: 17 }}
+        camera={{ position: cameraPosition, fov }}
         style={{ borderRadius: '8px' }}
       >
         <ambientLight intensity={0.6} />
@@ -199,7 +211,7 @@ export default function LipSyncAvatoon({
           <Environment preset="sunset" />
         </Suspense>
         <OrbitControls
-          target={[0, 1.2, 0]}
+          target={cameraTarget}
           enablePan={false}
           enableZoom={true}
           enableRotate={true}
