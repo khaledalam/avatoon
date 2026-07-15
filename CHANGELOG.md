@@ -1,3 +1,9 @@
+## [1.9.2](https://github.com/khaledalam/avatoon/compare/v1.9.1...v1.9.2) (2026-07-15)
+
+### Bug Fixes
+
+* add live auto-updating downloads chart at top of readme ([93d3099](https://github.com/khaledalam/avatoon/commit/93d309970dfe86dd05bd8b4409af35c5fef091bf))
+
 ## [1.9.1](https://github.com/khaledalam/avatoon/compare/v1.9.0...v1.9.1) (2026-07-15)
 
 ### Bug Fixes
