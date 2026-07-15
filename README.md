@@ -136,6 +136,49 @@ function App() {
 npm run example
 ```
 
+## 📱 React Native (Expo)
+
+Avatoon runs on React Native too. The same `<Avatoon>` component renders through
+`@react-three/fiber/native` (via `expo-gl`) and plays audio through `expo-av` —
+selected automatically by the package's `react-native` export condition, so you
+import from `'avatoon'` exactly as on web.
+
+```bash
+npx expo install expo-gl expo-av expo-asset expo-file-system \
+  @react-three/fiber @react-three/drei three
+npm install avatoon
+```
+
+```tsx
+import { useRef } from 'react';
+import { View, Pressable, Text } from 'react-native';
+import { Avatoon, type AvatoonHandle } from 'avatoon';
+
+export default function App() {
+  const avatar = useRef<AvatoonHandle>(null);
+  return (
+    <View style={{ flex: 1 }}>
+      <Avatoon ref={avatar} glbUrl="https://.../model.glb" visemeJson={visemeJson} />
+      <Pressable onPress={() => avatar.current?.toggle()}>
+        <Text>Talk</Text>
+      </Pressable>
+    </View>
+  );
+}
+```
+
+**Platform differences**
+
+| | Web | React Native |
+|---|---|---|
+| Renderer | `@react-three/fiber` (DOM `<canvas>`) | `@react-three/fiber/native` (`expo-gl`) |
+| Audio | `HTMLAudioElement` | `expo-av` (base64 WAV written to a temp file) |
+| Play control | `showPlayVoiceButton` or `ref` | `ref` only (the built-in button is DOM) |
+
+A full runnable example lives in [`examples/native`](./examples/native). Note:
+HDR `environmentPreset` lighting is more limited under `@react-three/drei/native`,
+and R3F's native entry is most battle-tested on the v8 line (React 18 / Expo 51).
+
 ## 🧩 API
 
 ### `Avatoon(props)`

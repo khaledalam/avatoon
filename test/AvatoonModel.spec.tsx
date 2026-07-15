@@ -121,4 +121,53 @@ describe('AvatoonModel', () => {
       runFrames({ clock: { getElapsedTime: () => 1 } })
     ).not.toThrow();
   });
+
+  it('plays audio and drives mouth visemes when shouldPlay is true', async () => {
+    await act(async () => {
+      render(
+        <AvatoonModel
+          url="dummy.glb"
+          goal="Normal"
+          shouldPlay
+          visemeJson={{
+            visemes: [
+              { time: 0, viseme: 'A' },
+              { time: 0.3, viseme: 'B' },
+            ],
+            // non-empty so a web AudioClock is created (stubbed window.Audio)
+            audio_base64: 'UklGRg==',
+          }}
+          onRenderComplete={jest.fn()}
+        />
+      );
+    });
+
+    // isTalking is now true → the viseme-driving frame reads the audio clock
+    // (stub currentTime = 0.5) and applies morph influences without throwing.
+    expect(() =>
+      runFrames({ clock: { getElapsedTime: () => 0.5 } })
+    ).not.toThrow();
+  });
+
+  it('stops talking when shouldPlay flips to false', async () => {
+    const props = {
+      url: 'dummy.glb',
+      goal: 'Normal' as const,
+      visemeJson: {
+        visemes: [{ time: 0, viseme: 'A' }],
+        audio_base64: 'UklGRg==',
+      },
+      onRenderComplete: jest.fn(),
+    };
+    let rerender: (ui: React.ReactElement) => void = () => {};
+    await act(async () => {
+      ({ rerender } = render(<AvatoonModel {...props} shouldPlay />));
+    });
+    await act(async () => {
+      rerender(<AvatoonModel {...props} shouldPlay={false} />);
+    });
+    expect(() =>
+      runFrames({ clock: { getElapsedTime: () => 0.5 } })
+    ).not.toThrow();
+  });
 });

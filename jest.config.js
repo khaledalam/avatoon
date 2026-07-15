@@ -17,6 +17,10 @@ module.exports = {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^three/examples/jsm/utils/SkeletonUtils$':
       '<rootDir>/test/__mocks__/skeletonUtils.ts',
+    // Optional native peers aren't installed; map them to manual mocks so the
+    // React Native audio clock can be unit-tested in jsdom.
+    '^expo-av$': '<rootDir>/test/__mocks__/expo-av.ts',
+    '^expo-file-system$': '<rootDir>/test/__mocks__/expo-file-system.ts',
   },
   setupFilesAfterEnv: ['./jest.setup.ts'],
 };

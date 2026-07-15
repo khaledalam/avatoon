@@ -1,9 +1,33 @@
-# Reusable workflow for PRs; to eject, you can replace this file with
-# https://github.com/ryansonshine/ryansonshine/blob/main/.github/workflows/pr.yml
 name: 🔖 Pull Request
 
+# Ejected from the ryansonshine reusable workflow: it ran a Node 16 matrix, and
+# vite 5 requires Node >= 18 (`crypto.getRandomValues is not a function` on 16),
+# so that job could never pass. This mirrors the local `ci.yml` steps across the
+# Node versions the package actually supports.
 on: [pull_request]
 
 jobs:
   build:
-    uses: ryansonshine/ryansonshine/.github/workflows/pr.yml@main
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18.x, 20.x]
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🟦 Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔨 Build
+        run: npm run build --if-present
+
+      - name: 🧪 Test
+        run: npm test
