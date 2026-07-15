@@ -11,6 +11,8 @@
 [![GitHub stars][stars-img]][stars-url]
 [![Sponsor][sponsor-img]][sponsor-url]
 
+[![avatoon npm downloads](https://raw.githubusercontent.com/khaledalam/avatoon/main/assets/downloads.png)](https://npm-stat.com/charts.html?package=avatoon)
+
 
 **Avatoon** is a lightweight React Three Fiber component for rendering animated 3D avatars with real-time viseme-driven lip-sync. It supports lifelike head movements, morph target control, and optional goal-based gestures (e.g., flexing, sleeping), making it ideal for voice assistants, interactive characters, or storytelling apps.
 
@@ -277,13 +279,6 @@ setup and development workflow, and please review our
 [SECURITY.md](./SECURITY.md).
 
 
-## 📈 Downloads
-
-[![npm downloads][downloads-img]][npm-url]
-
-[![Downloads graph][downloads-graph-img]][downloads-graph-url]
-
-
 ## 💖 Support
 
 If Avatoon is useful to you, consider supporting its development — it helps a lot
@@ -312,8 +307,6 @@ and keeps the project maintained:
 [npm-img]:https://img.shields.io/npm/v/avatoon
 [npm-url]:https://www.npmjs.com/package/avatoon
 [downloads-img]:https://img.shields.io/npm/dm/avatoon
-[downloads-graph-img]:https://nodei.co/npm-dl/avatoon.png?months=12&height=2
-[downloads-graph-url]:https://npm-stat.com/charts.html?package=avatoon
 [size-img]:https://img.shields.io/bundlejs/size/avatoon
 [size-url]:https://bundlejs.com/?q=avatoon
 [types-img]:https://img.shields.io/npm/types/avatoon

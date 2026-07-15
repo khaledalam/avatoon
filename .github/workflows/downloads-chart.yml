@@ -1,0 +1,41 @@
+name: 📈 Update downloads chart
+
+# Regenerates assets/downloads.png from npm's downloads API on a daily cron so
+# the README graph stays current on both GitHub and npm (README images are
+# fetched at view-time, so no republish is needed for the chart to update).
+
+on:
+  schedule:
+    - cron: '17 3 * * *' # daily at 03:17 UTC
+  workflow_dispatch:
+
+# Only touches assets/downloads.png, which is not in release.yml's path filter,
+# so chart updates never trigger a package release.
+jobs:
+  chart:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🟦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🖼️ Generate downloads chart
+        run: node scripts/gen-downloads-chart.mjs
+
+      - name: 💾 Commit if changed
+        run: |
+          git config user.name "Khaled Alam"
+          git config user.email "khaledalam.net@gmail.com"
+          git add assets/downloads.png
+          if git diff --cached --quiet; then
+            echo "No change in downloads chart."
+          else
+            git commit -m "chore: update downloads chart [skip ci]"
+            git push
+          fi
