@@ -1,3 +1,9 @@
+## [1.9.3](https://github.com/khaledalam/avatoon/compare/v1.9.2...v1.9.3) (2026-07-15)
+
+### Bug Fixes
+
+* replace broken codecov and bundlejs badges with self-hosted accurate badges ([c611c70](https://github.com/khaledalam/avatoon/commit/c611c70dd206b76f90c1276cf85b97e5d27c2c00))
+
 ## [1.9.2](https://github.com/khaledalam/avatoon/compare/v1.9.1...v1.9.2) (2026-07-15)
 
 ### Bug Fixes
