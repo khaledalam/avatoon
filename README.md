@@ -277,6 +277,13 @@ setup and development workflow, and please review our
 [SECURITY.md](./SECURITY.md).
 
 
+## 📈 Downloads
+
+[![npm downloads][downloads-img]][npm-url]
+
+[![Downloads graph][downloads-graph-img]][downloads-graph-url]
+
+
 ## 💖 Support
 
 If Avatoon is useful to you, consider supporting its development — it helps a lot
@@ -305,6 +312,8 @@ and keeps the project maintained:
 [npm-img]:https://img.shields.io/npm/v/avatoon
 [npm-url]:https://www.npmjs.com/package/avatoon
 [downloads-img]:https://img.shields.io/npm/dm/avatoon
+[downloads-graph-img]:https://nodei.co/npm-dl/avatoon.png?months=12&height=2
+[downloads-graph-url]:https://npm-stat.com/charts.html?package=avatoon
 [size-img]:https://img.shields.io/bundlejs/size/avatoon
 [size-url]:https://bundlejs.com/?q=avatoon
 [types-img]:https://img.shields.io/npm/types/avatoon
