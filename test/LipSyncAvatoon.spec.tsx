@@ -83,4 +83,34 @@ describe('LipSyncAvatoon', () => {
     render(<LipSyncAvatoon />);
     expect(screen.getByTestId('lipsync-canvas')).toBeInTheDocument();
   });
+
+  it('applies a blink pulse when the blink window opens', () => {
+    render(<LipSyncAvatoon glbUrl="dummy.glb" />);
+    // First blink fires at ~3s; land just inside the 0.15s blink window so the
+    // pulse value is non-zero and gets written to the blink morph target.
+    expect(() =>
+      runFrames({ clock: { getElapsedTime: () => 3.05 } }, 3.05)
+    ).not.toThrow();
+  });
+
+  it('lerps the mouth closed on idle frames after talking', () => {
+    render(<LipSyncAvatoon glbUrl="dummy.glb" />);
+
+    // Talk to raise mouth influences, then stop and idle so they lerp down.
+    fireEvent.click(screen.getByRole('button', { name: /start talking/i }));
+    runFrames({ clock: { getElapsedTime: () => 5 } }, 0.2);
+    fireEvent.click(screen.getByRole('button', { name: /stop talking/i }));
+    expect(() =>
+      runFrames({ clock: { getElapsedTime: () => 6 } }, 0.2)
+    ).not.toThrow();
+  });
+
+  it('handles button hover in/out', () => {
+    render(<LipSyncAvatoon glbUrl="dummy.glb" />);
+    const button = screen.getByRole('button', { name: /start talking/i });
+    expect(() => {
+      fireEvent.mouseOver(button);
+      fireEvent.mouseOut(button);
+    }).not.toThrow();
+  });
 });

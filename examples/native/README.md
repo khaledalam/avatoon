@@ -17,11 +17,17 @@ npx expo install expo-gl expo-av expo-asset expo-file-system \
 npm install avatoon
 ```
 
-Then drop [`App.tsx`](./App.tsx) into your project and run:
+Then drop one of the example screens into your project and run:
 
 ```bash
 npx expo start
 ```
+
+## Examples
+
+- [`App.tsx`](./App.tsx) — audio-synced lip-sync driven imperatively via a `ref`.
+- [`GoalsExample.tsx`](./GoalsExample.tsx) — goal-based gestures (Normal / Muscle
+  / Sleep) with no audio, switched from RN buttons.
 
 ## How it differs from web
 
