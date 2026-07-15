@@ -1,3 +1,9 @@
+## [1.9.1](https://github.com/khaledalam/avatoon/compare/v1.9.0...v1.9.1) (2026-07-15)
+
+### Bug Fixes
+
+* refresh readme and add downloads graph, republish to npm ([7c288a5](https://github.com/khaledalam/avatoon/commit/7c288a5a383e32fc014df5b7906083b10a9a2fb9))
+
 ## [1.9.0](https://github.com/khaledalam/avatoon/compare/v1.8.1...v1.9.0) (2026-07-09)
 
 ### Features
