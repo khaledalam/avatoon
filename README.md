@@ -16,6 +16,8 @@
 
 **Avatoon** is a lightweight React Three Fiber component for rendering animated 3D avatars with real-time viseme-driven lip-sync. It supports lifelike head movements, morph target control, and optional goal-based gestures (e.g., flexing, sleeping), making it ideal for voice assistants, interactive characters, or storytelling apps.
 
+> ⚛️ **Works on both React (web) and React Native (Expo).** The same `<Avatoon>` API runs in the browser (DOM `<canvas>` + `HTMLAudioElement`) and on mobile via `@react-three/fiber/native` + `expo-av` — selected automatically, so you `import { Avatoon } from 'avatoon'` on both. See [React Native (Expo)](#-react-native-expo).
+
 ### 🎮 [**Try the live demo →**](https://khaledalam.net/avatoon/)
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/khaledalam/avatoon/tree/main/example)
@@ -32,6 +34,7 @@
 - 🎛️ Imperative `play()` / `stop()` control via a `ref`  
 - 🌐 GLTF model support via `useGLTF`  
 - ⚛️ Plug-and-play with React Three Fiber + Drei  
+- 📱 Cross-platform: one API for **React (web)** and **React Native (Expo)**  
 - 🎯 Goal-based gestures like "Muscle" or "Sleep"
 
 ## 📦 Installation
