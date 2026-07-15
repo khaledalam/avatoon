@@ -5,7 +5,7 @@
 [![npm downloads][downloads-img]][npm-url]
 [![minzipped size][size-img]][size-url]
 [![Build Status][build-img]][build-url]
-[![Code Coverage][codecov-img]][codecov-url]
+[![Code Coverage][coverage-img]][coverage-url]
 [![TypeScript][types-img]][npm-url]
 [![License][license-img]][license-url]
 [![GitHub stars][stars-img]][stars-url]
@@ -307,8 +307,8 @@ and keeps the project maintained:
 [npm-img]:https://img.shields.io/npm/v/avatoon
 [npm-url]:https://www.npmjs.com/package/avatoon
 [downloads-img]:https://img.shields.io/npm/dm/avatoon
-[size-img]:https://img.shields.io/bundlejs/size/avatoon
-[size-url]:https://bundlejs.com/?q=avatoon
+[size-img]:https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/khaledalam/avatoon/main/.github/badges/size.json
+[size-url]:https://bundlephobia.com/package/avatoon
 [types-img]:https://img.shields.io/npm/types/avatoon
 [license-img]:https://img.shields.io/npm/l/avatoon
 [license-url]:https://github.com/khaledalam/avatoon/blob/main/LICENSE
@@ -316,5 +316,5 @@ and keeps the project maintained:
 [stars-url]:https://github.com/khaledalam/avatoon/stargazers
 [sponsor-img]:https://img.shields.io/badge/%E2%9D%A4-Sponsor-ea4aaa
 [sponsor-url]:https://github.com/sponsors/khaledalam
-[codecov-img]:https://codecov.io/gh/khaledalam/avatoon/branch/main/graph/badge.svg
-[codecov-url]:https://codecov.io/gh/khaledalam/avatoon
+[coverage-img]:https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/khaledalam/avatoon/main/.github/badges/coverage.json
+[coverage-url]:https://github.com/khaledalam/avatoon/actions/workflows/codeql-analysis.yml

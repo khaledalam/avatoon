@@ -20,6 +20,8 @@ jobs:
     uses: ryansonshine/ryansonshine/.github/workflows/codeql-analysis.yml@main
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # allow committing the refreshed coverage badge
     steps:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v4
@@ -40,10 +42,24 @@ jobs:
       - name: Run jest
         run: npx jest --coverage
 
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/lcov.info
-          disable_search: true
-          fail_ci_if_error: true
+      - name: 🔨 Build (for bundle size)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: npm run build
+
+      # Self-hosted badges: regenerate coverage (from jest) and minzipped size
+      # (from the built ESM bundle) and commit them, so the README badges are
+      # always accurate without depending on Codecov / bundlejs / bundlephobia.
+      - name: 🏷️ Refresh coverage & size badges
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          node scripts/gen-coverage-badge.mjs
+          node scripts/gen-size-badge.mjs
+          git config user.name "Khaled Alam"
+          git config user.email "khaledalam.net@gmail.com"
+          git add .github/badges/coverage.json .github/badges/size.json
+          if git diff --cached --quiet; then
+            echo "Badges unchanged."
+          else
+            git commit -m "chore: update coverage & size badges [skip ci]"
+            git push
+          fi
