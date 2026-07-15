@@ -2,6 +2,10 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
+  // Emit a single canonical report. Uploading clover.xml + coverage-final.json
+  // alongside lcov.info made Codecov double-count paths (absolute vs relative),
+  // registering phantom 0% files that roughly halved the reported coverage.
+  coverageReporters: ['text', 'lcov'],
   transform: {
     '^.+\\.(ts|tsx)$': ['ts-jest', {
       useESM: true,
