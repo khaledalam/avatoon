@@ -7,6 +7,7 @@
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
+      "react-native": "./lib/native/index.es.js",
       "require": "./lib/Avatoon.umd.js",
       "import": "./lib/Avatoon.es.js"
     }
@@ -17,7 +18,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc --project tsconfig.build.json && vite build",
+    "build": "tsc --project tsconfig.build.json && vite build && npm run build:native",
+    "build:native": "vite build --config vite.native.config.mjs",
     "dev": "tsc --project tsconfig.build.json && vite build --watch",
     "clean": "rm -rf ./lib/",
     "lint": "eslint ./src/ --fix",
@@ -53,8 +55,14 @@
   "peerDependencies": {
     "@react-three/drei": ">=9.0.0",
     "@react-three/fiber": ">=8.0.0",
+    "expo": "*",
+    "expo-asset": "*",
+    "expo-av": "*",
+    "expo-file-system": "*",
+    "expo-gl": "*",
     "react": ">=18",
     "react-dom": ">=18",
+    "react-native": "*",
     "three": ">=0.153.0"
   },
   "peerDependenciesMeta": {
@@ -62,7 +70,25 @@
       "optional": false
     },
     "react-dom": {
-      "optional": false
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    },
+    "expo": {
+      "optional": true
+    },
+    "expo-asset": {
+      "optional": true
+    },
+    "expo-av": {
+      "optional": true
+    },
+    "expo-file-system": {
+      "optional": true
+    },
+    "expo-gl": {
+      "optional": true
     }
   },
   "devDependencies": {

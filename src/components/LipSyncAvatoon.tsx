@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect, useMemo, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { Canvas, useFrame, OrbitControls, useGLTF } from '../platform';
 import * as THREE from 'three';
 import { clone as cloneSkeleton } from 'three/examples/jsm/utils/SkeletonUtils';
 import { AvatoonErrorBoundary } from './AvatoonErrorBoundary';

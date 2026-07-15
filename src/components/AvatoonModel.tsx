@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState, useMemo } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
+import { useFrame, useThree, useGLTF, createAudioClock } from '../platform';
+import type { AudioClock } from '../platform';
 import * as THREE from 'three';
 import { Bone, Group, Object3D } from 'three';
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -24,7 +24,7 @@ export function AvatoonModel({
   const [visemeData, setVisemeData] = useState<
     Array<{ time: number; viseme: string | null }>
   >([]);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioRef = useRef<AudioClock | null>(null);
 
   const group = useRef<Group | null>(null);
   const { scene: gltfScene } = useGLTF(url) as unknown as GLTF;
@@ -63,16 +63,13 @@ export function AvatoonModel({
 
       setVisemeData(parseVisemes(visemeJson, phonemeToViseme));
 
-      if (
-        visemeJson &&
-        visemeJson.audio_base64 &&
-        typeof window !== 'undefined' &&
-        typeof Audio !== 'undefined'
-      ) {
-        const audio = new Audio(
-          `data:audio/wav;base64,${visemeJson.audio_base64}`
-        );
-        audioRef.current = audio;
+      if (visemeJson && visemeJson.audio_base64) {
+        // Platform-specific clock (HTMLAudio on web, expo-av on native).
+        // Returns null when audio is unavailable (e.g. SSR), so we no-op.
+        const clock = createAudioClock({
+          audioBase64: visemeJson.audio_base64,
+        });
+        if (clock) audioRef.current = clock;
       }
     };
 
@@ -83,8 +80,7 @@ export function AvatoonModel({
     // clip playing and overlapping with the new one.
     return () => {
       if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.src = '';
+        audioRef.current.dispose();
         audioRef.current = null;
       }
     };
@@ -227,7 +223,7 @@ export function AvatoonModel({
     if (!isTalking || !audioRef.current || mouthMeshes.current.length === 0)
       return;
 
-    const currentTime = audioRef.current.currentTime;
+    const currentTime = audioRef.current.getCurrentTime();
 
     // Find the most recent viseme
     const current = findActiveViseme(visemeData, currentTime);

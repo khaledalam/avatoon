@@ -5,8 +5,7 @@ import {
   useImperativeHandle,
   type CSSProperties,
 } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { Canvas, OrbitControls } from '../platform';
 import { AvatoonModel } from './AvatoonModel';
 import { CameraFovAnimator } from './CameraFovAnimator';
 import { AvatoonErrorBoundary } from './AvatoonErrorBoundary';
