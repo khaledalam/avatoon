@@ -11,6 +11,7 @@ on:
       - 'vite.config.mjs'
       - '.releaserc'
       - '.github/workflows/release.yml'
+      - 'README.md'
 
 jobs:
   release:
