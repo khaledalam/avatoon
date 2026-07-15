@@ -1,3 +1,9 @@
+## [1.10.0](https://github.com/khaledalam/avatoon/compare/v1.9.3...v1.10.0) (2026-07-15)
+
+### Features
+
+* React Native (Expo) support ([4adfe3a](https://github.com/khaledalam/avatoon/commit/4adfe3a5e85590d7126f3b1bdea385d79a6cbf11))
+
 ## [1.9.3](https://github.com/khaledalam/avatoon/compare/v1.9.2...v1.9.3) (2026-07-15)
 
 ### Bug Fixes
