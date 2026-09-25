@@ -333,7 +333,7 @@ and keeps the project maintained:
 - ⭐ **Star the repo** — the easiest way to help
 - 💛 [**Sponsor on GitHub**](https://github.com/sponsors/khaledalam)
 - ☕ [**Buy Me a Coffee**](https://www.buymeacoffee.com/khaledalam)
-- 💵 [**PayPal**](https://paypal.me/khaledalam)
+- 💵 [**PayPal**](https://paypal.me/khaledalamxyz)
 
 
 ## 📄 License
